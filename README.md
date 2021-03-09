@@ -1,2 +1,0 @@
-# GBlog
-blog
