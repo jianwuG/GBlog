@@ -6,7 +6,7 @@ import './index.scss'
 const TagList=()=>{
     return(
         <>
-            标签管理list
+            项目管理list
         </>
     )
 };

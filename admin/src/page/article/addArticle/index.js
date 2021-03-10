@@ -3,13 +3,13 @@ import React from 'react';
 import './index.scss'
 
 
-const TagList=()=>{
+const AddArticle=()=>{
     return(
         <>
-            标签管理list
+         添加文章
         </>
     )
 };
 
 
-export default TagList;
+export default AddArticle;

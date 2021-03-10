@@ -31,7 +31,7 @@ const Login = () => {
     return (
         <div className='login-wrapper'>
             <Spin tip="Loading..." spinning={isLoading}>
-                <Card title="Renun_Blog" bordered={true} className='wrapper-card'>
+                <Card title="jianwuG博客登录后台" bordered={true} className='wrapper-card'>
                     <Space direction="vertical" size={20} style={{width:"100%"}}>
                         <Input
                             id="userName"
