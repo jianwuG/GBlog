@@ -1,8 +1,13 @@
 .list-div{
    display: flex;
   width: 100%;
-  .list-item{
-    display: flex;
-    width: 100%;
+
+}
+.list-item{
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid red;
+  .list-item-tag{
+    cursor: pointer;
   }
 }

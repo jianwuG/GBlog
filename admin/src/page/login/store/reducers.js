@@ -2,6 +2,9 @@ import {fromJS} from 'immutable';
 import * as actionTypes from './actionTypes'
 
 const defaultState=fromJS({
+    useName:'',
+    passWord:'',
+    isLoading:false,
 
 });
 export default (state = defaultState,action)=>{

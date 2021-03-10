@@ -1,26 +1,58 @@
-import React, {useState} from 'react';
-import {Row, Col, List} from 'antd'
-import ArticleItem from './../articleItem'
-
+import React, {useState,useEffect} from 'react';
+import {useSelector} from "react-redux";
+import {Row, Col, List, Skeleton, Space, Button,Image,Tag } from 'antd'
+import {EditOutlined,DeleteOutlined,ToTopOutlined} from '@ant-design/icons'
 import './index.scss'
 
 
 const ArticleList = () => {
-    const [list, setList] = useState([{title:'文章标题111111',tab:'学习',update_time:'2020-01-21 10:20:30',read_count:0}])
+    const [articleList, setList] = useState([]);
+    const {list,initLoading,loading}=useSelector(state=>({
+        list:state.getIn(['article','list']),
+        initLoading:state.getIn(['article','initLoading']),
+        loading:state.getIn(['article','loading']),
+    }));
+
+    useEffect(()=>{
+        setList(list.toJS())
+    },[list]);
+    const onLoadMore=()=>{
+
+    };
+    const loadMore =
+        !initLoading && !loading ? (
+            <div
+                style={{
+                    textAlign: 'center',
+                    marginTop: 12,
+                    height: 32,
+                    lineHeight: '32px',
+                }}
+            >
+                <Button onClick={onLoadMore}>loading more</Button>
+            </div>
+        ) : null;
+
     return (
         <>
-            <List header={
-                <Row className="list-div">
-                    <Col span={8}>
+            <List
+                loading={initLoading}
+                loadMore={loadMore}
+                header={
+                <Row className="list-div" wrap="true" justify="center " style={{borderBottom:"1px solid #ddd"}}>
+                    <Col span={7}>
                         <b>标题</b>
                     </Col>
                     <Col span={4}>
+                        <b>封面大图</b>
+                    </Col>
+                    <Col span={3}>
                         <b>分类</b>
                     </Col>
-                    <Col span={4}>
+                    <Col span={3}>
                         <b>更新时间</b>
                     </Col>
-                    <Col span={4}>
+                    <Col span={3}>
                         <b>浏览量</b>
                     </Col>
 
@@ -30,10 +62,38 @@ const ArticleList = () => {
                 </Row>
             }
                   bordered
-                  dataSource={list}
+                  dataSource={articleList}
                   renderItem={item => (
-                      <List.Item className="list-item">
-                          <ArticleItem/>
+                      <List.Item className="list-item" style={{borderBottom:"1px solid #ddd"}}>
+                          <Skeleton avatar title={false} loading={item.loading} active>
+                              <Row className="list-div" wrap="true" justify="center" align="middle" >
+                                  <Col span={7}>
+                                     {item.title}
+                                  </Col>
+                                  <Col span={4}>
+                                      {
+                                          item.firstImg?<Image src={item.firstImg} />:null
+                                      }
+                                  </Col>
+                                  <Col span={3} className='list-item-tag'>
+                                      <Tag>{item.tab}</Tag>
+                                  </Col>
+                                  <Col span={3}>
+                                     {item.update_time}
+                                  </Col>
+                                  <Col span={3}>
+                                     {item.read_count}
+                                  </Col>
+
+                                  <Col span={4}>
+                                      <Space direction='vertical' size={[2,4]}>
+                                          <Button type="link" size='small' shape="round" icon={<EditOutlined/>}>修改</Button>
+                                          <Button type="link"  danger size='small' shape="round" icon={<DeleteOutlined />}>删除 </Button>
+                                          <Button type="link" size='small' shape="round" icon={<ToTopOutlined />}>置顶 </Button>
+                                      </Space>
+                                  </Col>
+                              </Row>
+                          </Skeleton>
                       </List.Item>
                   )}
 

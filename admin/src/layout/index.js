@@ -57,7 +57,7 @@ const Home = (props) => {
                             <Breadcrumb.Item>首页</Breadcrumb.Item>
                             <Breadcrumb.Item>添加文章</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div className="site-layout-background" style={{padding: 24, minHeight: 360}}>
+                        <div className="site-layout-background" >
                                <Route path="/" exact   component={AddArticle} />
                                <Route path="/article/list/" exact  component={ArticleList} />
                                <Route path="/tag/"  exact   component={TagList} />
