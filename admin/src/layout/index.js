@@ -55,13 +55,9 @@ const Home = (props) => {
                 <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} >
                     <div className="logo" style={{paddingTop:'64px'}}/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" inlineCollapsed='false'>
-                        <SubMenu key="article" icon={<FileWordOutlined />} title="文章管理">
-                            <Menu.Item key="/article/list/"  onClick={clickMenu}>文章列表</Menu.Item>
-                            <Menu.Item key="/"  onClick={clickMenu}>添加文章</Menu.Item>
-                        </SubMenu>
-                        <SubMenu key="tag" icon={<TagsOutlined />} title="标签管理">
+                        <Menu.Item key="/"  onClick={clickMenu}>添加文章</Menu.Item>
+                        <Menu.Item key="/article/list/"  onClick={clickMenu}>文章列表</Menu.Item>
                             <Menu.Item key="/tag/"  onClick={clickMenu}>标签列表</Menu.Item>
-                        </SubMenu>
                         <Menu.Item key="/project/" icon={<TableOutlined />}  onClick={clickMenu}>
                             项目展示管理
                         </Menu.Item>
