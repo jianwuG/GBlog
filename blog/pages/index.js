@@ -9,7 +9,7 @@ import style from './style/home.module.scss'
 
 const Home=()=>{
     return(
-        <>
+        <div className={style.homeWrapper}>
         <Head><title>主页 | JianWuG</title></Head>
           <Header/>
           <Row justify='center'>
@@ -20,7 +20,7 @@ const Home=()=>{
                   <Side/>
               </Col>
           </Row>
-        </>
+        </div>
     )
 };
 export default Home;

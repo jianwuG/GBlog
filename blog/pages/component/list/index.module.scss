@@ -11,6 +11,8 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
+  padding: 2px;
   .listItemLeft{
     display: flex;
     flex-direction: column;
@@ -39,8 +41,8 @@
     flex-direction: column;
     width: 25%;
     .listItemImg{
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
 
     }
 
