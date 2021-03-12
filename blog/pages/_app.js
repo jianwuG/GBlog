@@ -1,5 +1,8 @@
 import App from 'next/app'
-
+import dynamic from 'next/dynamic'
 import 'antd/dist/antd.css'
-// import './index.scss'
+dynamic(
+    import('lib-flexible'),
+    {ssr: false}
+);
 export default App

@@ -1,10 +1,10 @@
 import React from 'react';
-import './index.scss'
+import style from './index.module.css'
 
 const Header=()=>{
     return(
-        <div className='header-wrapper'>
-
+        <div className={style.headerWrapper}>
+                2222
         </div>
     )
 }
