@@ -1,0 +1,18 @@
+
+$font-color-main:#242424;
+$font-color-weak:#666666;
+
+
+
+$font-size-large:24px;
+$font-size-main:20px;
+$font-size-weak:18px;
+$font-size-small:14px;
+
+
+
+@mixin w-h-center(){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,48 @@
+@import "./../../index.module.scss";
+
+.listWrapper{
+  width: 100%;
+
+}
+
+.listItem{
+  width: 100%;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  .listItemLeft{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    width: 75%;
+    .title{
+      font-size: $font-size-large;
+      font-weight: bold;
+    }
+    .marked{
+      font-size: $font-size-small;
+      color: $font-color-weak;
+      margin: 14px 0;
+    }
+    .time{
+       color: #bbb;
+      .tag{
+         margin-left: 16px;
+      }
+    }
+
+  }
+  .listItemRight{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 25%;
+    .listItemImg{
+      width: 100px;
+      height: 100px;
+
+    }
+
+  }
+}

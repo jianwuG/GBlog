@@ -1,0 +1,14 @@
+.headerWrapper{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    .avatar{
+       display: flex;
+      align-items: center;
+        flex-direction: row;
+
+    }
+}

@@ -1,0 +1,52 @@
+@import "./../../index.module.scss";
+.userInfo{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  .avatar{
+    width: 100px;
+    height: 100px;
+    transition: all 2.0s;
+    &:hover{
+      transform: rotate(360deg)
+    }
+  }
+  .name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: $font-color-main;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+}
+.sideMenu{
+  color: $font-color-main;
+  font-weight: bold;
+  margin-top: 10px;
+
+  .sideMenuNum{
+    color: $font-color-weak;
+    font-weight:normal;
+  }
+}
+
+.sideNet{
+  display: flex;
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  .netItem{
+    font-size:$font-size-main;
+    display: flex;
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,10 @@
+@import "./../../index.module.scss";
+
+.cateGoryWrapper{
+   @include w-h-center();
+   .cateGoryItem{
+      width: 100px;
+      height: 40px;
+      @include w-h-center();
+   }
+}

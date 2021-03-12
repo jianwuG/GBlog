@@ -33,7 +33,7 @@ const AddArticle = () => {
 
     const changeContent = (e)=>{
         setArticleMark(e.target.value)
-        let html = marked(e.target.value).replace(/<pre>/g, "<pre class='hljs'>")
+        let html = marked(e.target.value).replace(/<pre>/g, "<pre category='hljs'>")
         setArticleHtml(html)
     };
 

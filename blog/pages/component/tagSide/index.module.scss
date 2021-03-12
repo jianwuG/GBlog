@@ -1,0 +1,12 @@
+@import "./../../index.module.scss";
+
+.tagSideWrapper{
+  @include w-h-center;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .tagItem{
+    margin: 6px;
+    @include w-h-center;
+  }
+}
