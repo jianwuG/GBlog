@@ -1,3 +1,4 @@
+
 .List {
 }
 
@@ -5,7 +6,20 @@
   margin-left: 10px;
 }
 .homeWrapper{
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
   background: pink;
+  overflow-y: auto;
+  position: relative;
+  .homeContext{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.homeGoTop{
+  position: fixed;
+  right: 80px;
+  bottom: 80px;
+  font-size:40px;
 }

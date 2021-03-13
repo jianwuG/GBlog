@@ -5,8 +5,9 @@ import Header from "./component/header";
 const TimeLine = () => {
     return (
         <>
-            <Head><title>标签 | JianWuG</title></Head>
+            <Head><title>时间轴 | JianWuG</title></Head>
             <Header/>
+            <span>222333</span>
         </>
     )
 };
