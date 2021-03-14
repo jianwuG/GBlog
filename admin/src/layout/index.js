@@ -34,7 +34,7 @@ const Home = (props) => {
     const getText=(key)=>{
         let _text='';
         switch (key) {
-            case '/':
+            case '/index/':
                 _text='添加文章';break;
             case '/article/list/':
                 _text='文章列表';break;
@@ -55,7 +55,7 @@ const Home = (props) => {
                 <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} >
                     <div className="logo" style={{paddingTop:'64px'}}/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" inlineCollapsed='false'>
-                        <Menu.Item key="/"  onClick={clickMenu}>添加文章</Menu.Item>
+                        <Menu.Item key="/index"  onClick={clickMenu}>添加文章</Menu.Item>
                         <Menu.Item key="/article/list/"  onClick={clickMenu}>文章列表</Menu.Item>
                             <Menu.Item key="/tag/"  onClick={clickMenu}>标签列表</Menu.Item>
                         <Menu.Item key="/project/" icon={<TableOutlined />}  onClick={clickMenu}>

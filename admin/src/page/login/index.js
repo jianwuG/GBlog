@@ -1,5 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {useHistory} from 'react-router-dom'
+import apiUrl from './../../api/apiUrl'
+import axios from 'axios'
+import {useHttpHook} from "../../hooks";
 import {Card, Input, Button, Spin, Space,message} from 'antd';
 import {UserOutlined, UnlockOutlined} from '@ant-design/icons'
 import './index.scss'
@@ -9,7 +12,8 @@ const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
-    const checkLogin = () => {
+
+    const CheckLogin = () => {
         setLoading(true);
         if(!userName){
             message.error('用户名不能为空')
@@ -24,9 +28,17 @@ const Login = () => {
         }
         else{
             setLoading(false);
-            history.push('/home')
+            console.log('zzzzzzzzzzzz',apiUrl.login,userName,password);
         }
+
+
+
     };
+    // const [loading,result]= useHttpHook({
+    //     url:'/api/getList',
+    //     method:'get',
+    // })
+    // console.log('11111111111111111111111',loading,result);
 
     return (
         <div className='login-wrapper'>
@@ -51,7 +63,7 @@ const Login = () => {
                                 setPassword(e.target.value)
                             }}
                         />
-                        <Button type="primary" size="large" block onClick={checkLogin}>登录</Button>
+                        <Button type="primary" size="large" block onClick={CheckLogin}>登录</Button>
                     </Space>
                 </Card>
             </Spin>
