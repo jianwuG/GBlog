@@ -16,6 +16,7 @@ class AdminController extends Controller {
     async login(){
         const {userName,password}=this.ctx.request.body;
         console.log('1111111111111111111111111',this.ctx.request.body);
+
         const sql=`
         SELECT user_name FROM blog_user WHERE user_name=${userName}
         AND password=${password}

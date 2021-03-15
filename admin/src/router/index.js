@@ -13,7 +13,8 @@ function Main() {
             <Provider store={store}>
                 <Router>
                     <Route path="/login/" exact component={Login}/>
-                    <Route path="/index/" component={Home}/>
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/index/"  component={Home}/>
                 </Router>
             </Provider>
         </>

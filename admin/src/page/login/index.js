@@ -1,9 +1,9 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom'
 import apiUrl from './../../api/apiUrl'
 import axios from 'axios'
 import {useHttpHook} from "../../hooks";
-import {Card, Input, Button, Spin, Space,message} from 'antd';
+import {Card, Input, Button, Spin, Space, message} from 'antd';
 import {UserOutlined, UnlockOutlined} from '@ant-design/icons'
 import './index.scss'
 
@@ -13,38 +13,37 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const history = useHistory();
 
-    const CheckLogin = () => {
+    const CheckLogin = async () => {
         setLoading(true);
-        if(!userName){
+        if (!userName) {
             message.error('用户名不能为空')
             setLoading(false);
             return false;
-        }
-        else if(!password){
+        } else if (!password) {
             message.error('密码不能为空');
             setLoading(false);
             return false;
 
-        }
-        else{
+        } else {
             setLoading(false);
-            console.log('zzzzzzzzzzzz',apiUrl.login,userName,password);
+            let data=await getLoginStatus();
+            if(data){
+                history.push('/index/')
+            }
+            console.log('zzzzzzzz',data);
+
         }
-
-
 
     };
-    // const [loading,result]= useHttpHook({
-    //     url:'/api/getList',
-    //     method:'get',
-    // })
-    // console.log('11111111111111111111111',loading,result);
+    const getLoginStatus= useHttpHook({url: apiUrl.login, method: 'post', body: {username: userName, password: password}});
+
 
     return (
         <div className='login-wrapper'>
             <Spin tip="Loading..." spinning={isLoading}>
                 <Card title="jianwuG博客登录后台" bordered={true} className='wrapper-card'>
-                    <Space direction="vertical" size={20} style={{width:"100%"}}>
+                    <Space direction="vertical" size={20} style={{width: "100%"}}>
+
                         <Input
                             id="userName"
                             size="large"

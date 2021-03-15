@@ -1,22 +1,53 @@
 import React, {useState,useEffect} from 'react';
 import {useSelector} from "react-redux";
+import Monent from 'moment'
 import {Row, Col, List, Skeleton, Space, Button,Image,Tag } from 'antd'
 import {EditOutlined,DeleteOutlined,ToTopOutlined} from '@ant-design/icons'
 import './index.scss'
+import {useHttpHook} from "../../../hooks";
+import apiUrl from "../../../api/apiUrl";
 
 
 const ArticleList = () => {
     const [articleList, setList] = useState([]);
+    const [page,setPage]=useState(0);
+    const [pageNum,setPageNum]=useState(10);
+    const [option,setOption]=useState(null);
+
+
     const {list,initLoading,loading}=useSelector(state=>({
         list:state.getIn(['article','list']),
         initLoading:state.getIn(['article','initLoading']),
         loading:state.getIn(['article','loading']),
     }));
 
-    useEffect(()=>{
-        setList(list.toJS())
-    },[list]);
+    useEffect( ()=>{
+        const options={
+            page_start:page*pageNum,
+            page_end:(page+1)*pageNum,
+        };
+
+        setOption(options);
+        console.log('zzzzzzzzzzzzzzz',options,option);
+
+        
+        // let _list=await getList();
+        // _list.map(item=>{
+        //     item.update_time_text=Monent().format("L");
+        //     return item;
+        // })
+        // setList(_list);
+    },[page]);
+
+    const getList=useHttpHook({url: apiUrl.articleList, method: 'post',body:option});
+
+
     const onLoadMore=()=>{
+        setOption({
+            page_start:page*pageNum,
+            page_end:(page+1)*pageNum,
+        });
+        console.log('ssssssssssssssssssss',option);
 
     };
     const loadMore =
@@ -79,10 +110,10 @@ const ArticleList = () => {
                                       <Tag>{item.tab}</Tag>
                                   </Col>
                                   <Col span={3}>
-                                     {item.update_time}
+                                     {item.update_time_text}
                                   </Col>
                                   <Col span={3}>
-                                     {item.read_count}
+                                     {item.read_count||0}
                                   </Col>
 
                                   <Col span={4}>

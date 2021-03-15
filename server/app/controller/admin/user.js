@@ -3,10 +3,10 @@
 const Controller = require('egg').Controller;
 
 class UserController extends Controller {
-    async index() {
+    async login() {
         const { ctx } = this;
-        const user=await ctx.service.user.find();
-        console.log('1111111111111',user);
+        const {username,password}=ctx.request.body;
+        const user=await ctx.service.user.find(username,password);
         ctx.body =user;
     }
 }

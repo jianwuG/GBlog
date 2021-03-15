@@ -1,57 +1,60 @@
 import {useState, useEffect, useCallback} from 'react'
 // import './../mock'
-import axios from 'axios'
 import {message} from "antd";
 
-const useHttpHook = ({
-                         url,
-                         method = 'post',
-                         headers,
-                         body = {},
-                         watch = []
-                     }) => {
-    const [result, setResult] = useState(null);
-    const [loading, setLoading] = useState(true);
+const useHttpHook = ({url, method = 'post', body = {},watch = []},headers) => {
 
-    async function Http () {
-        setLoading(true);
-        const defaultHeader = {
-            'Content-type': 'application/json'
-        };
-        let options = method.toUpperCase() === "GET" ? undefined : {
-            headers: {
-                ...defaultHeader,
-                headers
-            },
-            method,
-            body: JSON.stringify(body)
-        };
+    // const [result, setResult] = useState(null);
+    // const [loading, setLoading] = useState(true);
 
-        return new Promise((resolve, reject) => {
-            axios(url, options).then(res => {
+    const Http=async ()=>{
+        // setLoading(true);
+        const defaultHeader={
+            'Content-Type':'application/JSON'
+        };
+        let params;
+        if(method.toUpperCase()==='GET'){
+            params=undefined
+        }
+        else{
+            params={
+                headers:{
+                    ...defaultHeader,
+                    ...headers
+                },
+                method,
+                body:JSON.stringify(body)
+            }
+        }
+        return new Promise((resolve,reject)=>{
+            fetch(url,params).then(res=>res.json()).then(res=>{
+                console.log('11111111111111',res);
                 if(res.status===200)
                 {
-                    resolve(res.data.data);
-                    setResult(res.data.data);
+                    resolve(res.data);
+                    // setResult(res.data);
                 }
                 else{
-                    message.error(res.errMsg);
-                    reject(res.errMsg);
+                    console.log('11111111111111222',res.msg);
+
+                    // message.error(res.msg)
+                    // reject(res.msg)
                 }
-                setLoading(false);
-            }).catch(err => {
-                console.log('2222222222', err);
-                message.error(err);
-                reject(err);
-                setLoading(false);
+            }).catch(err=>{
+                console.log('zzzzzzz',err);
+                // message.error(err);
+                // reject(err);
+            }).finally(()=>{
+                // setLoading(false)
             })
         })
     }
+    //
+    // useEffect(  () => {
+    //     Http();
+    // }, watch);
 
-    useEffect(() => {
-        Http();
-    }, watch);
-    return [loading,result]
+    return Http
 };
 
 

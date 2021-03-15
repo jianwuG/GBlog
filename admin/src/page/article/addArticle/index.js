@@ -6,6 +6,8 @@ import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
 
 import {UserOutlined, PictureOutlined} from "@ant-design/icons";
+import {useHttpHook} from "../../../hooks";
+import apiUrl from "../../../api/apiUrl";
 
 
 const AddArticle = () => {
@@ -15,6 +17,8 @@ const AddArticle = () => {
     const [articleHtml ,setArticleHtml]=useState('预览内容');//html展示
     const [articleMark ,setArticleMark]=useState('');//mark内容
     const [typeName ,setTypeName] = useState(0);// 文章类别
+
+    const [option,setOption]=useState(null);
     const { TextArea } = Input;
 
     marked.setOptions({
@@ -37,6 +41,23 @@ const AddArticle = () => {
         setArticleHtml(html)
     };
 
+    const addArticle=async ()=>{
+       const option={
+           title,
+           firstPic,
+           mark:articleMark,
+           type:typeName,
+           status:0,
+           create_time:new Date().getTime(),
+           update_time:new Date().getTime(),
+       };
+        setOption({...option});
+        let result=await addArticleStatus();
+        console.log('add',result);
+
+    };
+
+    const addArticleStatus= useHttpHook({url: apiUrl.addArticle, method: 'post', body: {...option}});
 
     return (
         <>
@@ -59,7 +80,7 @@ const AddArticle = () => {
                     <Col span={5} className='addArticle-btn'>
                        <Space size={[16,20]}>
                            <Button type="primary" className='addArticle-btn-draft'>草稿箱</Button>
-                           <Button type="primary" className='addArticle-btn-release'>发布</Button>
+                           <Button type="primary" className='addArticle-btn-release' onClick={addArticle}>发布</Button>
                        </Space>
                     </Col>
                 </Row>

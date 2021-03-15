@@ -36,11 +36,11 @@ const Home = (props) => {
         switch (key) {
             case '/index/':
                 _text='添加文章';break;
-            case '/article/list/':
+            case '/index/article/list/':
                 _text='文章列表';break;
-            case '/tag/':
+            case '/index/tag/':
                 _text='标签列表';break;
-            case '/project/':
+            case '/index/project/':
                 _text = '项目展示管理';
                 break;
             default:
@@ -56,9 +56,9 @@ const Home = (props) => {
                     <div className="logo" style={{paddingTop:'64px'}}/>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" inlineCollapsed='false'>
                         <Menu.Item key="/index"  onClick={clickMenu}>添加文章</Menu.Item>
-                        <Menu.Item key="/article/list/"  onClick={clickMenu}>文章列表</Menu.Item>
-                            <Menu.Item key="/tag/"  onClick={clickMenu}>标签列表</Menu.Item>
-                        <Menu.Item key="/project/" icon={<TableOutlined />}  onClick={clickMenu}>
+                        <Menu.Item key="/index/article/list/"  onClick={clickMenu}>文章列表</Menu.Item>
+                            <Menu.Item key="/index/tag/"  onClick={clickMenu}>标签列表</Menu.Item>
+                        <Menu.Item key="/index/project/" icon={<TableOutlined />}  onClick={clickMenu}>
                             项目展示管理
                         </Menu.Item>
 
@@ -72,10 +72,10 @@ const Home = (props) => {
                             <Breadcrumb.Item>{breadText}</Breadcrumb.Item>
                         </Breadcrumb>
                         <div className="site-layout-background"  >
-                               <Route path="/" exact   component={AddArticle} />
-                               <Route path="/article/list/" exact  component={ArticleList} />
-                               <Route path="/tag/"  exact   component={TagList} />
-                               <Route path="/project/" exact  component={Project} />
+                               <Route path="/index" exact   component={AddArticle} />
+                               <Route path="/index/article/list/" exact  component={ArticleList} />
+                               <Route path="/index/tag/"  exact   component={TagList} />
+                               <Route path="/index/project/" exact  component={Project} />
                         </div>
                     </Content>
                     <Footer style={{textAlign: 'center',background:'#fff'}}>jianwuG博客后台管理系统</Footer>
