@@ -13,12 +13,10 @@ const useScroll=(scrollRef)=>{
         scrollRef.current.scrollTo(0, 0);
     }, []);
     useEffect(()=>{
-        console.log('====================================',scrollRef.current);
-
         scrollRef.current.addEventListener('scroll',handleScroll,false);
-        return ()=>{
-            scrollRef.current.removeEventListener('scroll',handleScroll,false);
-        }
+        // return ()=>{
+        //     scrollRef.current.removeEventListener('scroll',handleScroll,false);
+        // }
     },[]);
     return [scrollInfo,goTop];
 };

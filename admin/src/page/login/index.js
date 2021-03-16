@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom'
 import apiUrl from './../../api/apiUrl'
-import axios from 'axios'
 import {useHttpHook} from "../../hooks";
 import {Card, Input, Button, Spin, Space, message} from 'antd';
 import {UserOutlined, UnlockOutlined} from '@ant-design/icons'
@@ -30,8 +29,6 @@ const Login = () => {
             if(data){
                 history.push('/index/')
             }
-            console.log('zzzzzzzz',data);
-
         }
 
     };

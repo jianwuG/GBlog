@@ -12,43 +12,28 @@ const ArticleList = () => {
     const [articleList, setList] = useState([]);
     const [page,setPage]=useState(0);
     const [pageNum,setPageNum]=useState(10);
-    const [option,setOption]=useState(null);
+    const [initLoading,setInitLoading]=useState(false);
+    const [loading,setLoading]=useState(false);
 
-
-    const {list,initLoading,loading}=useSelector(state=>({
-        list:state.getIn(['article','list']),
-        initLoading:state.getIn(['article','initLoading']),
-        loading:state.getIn(['article','loading']),
-    }));
-
-    useEffect( ()=>{
+    useEffect(async ()=>{
         const options={
             page_start:page*pageNum,
             page_end:(page+1)*pageNum,
         };
 
-        setOption(options);
-        console.log('zzzzzzzzzzzzzzz',options,option);
-
-        
-        // let _list=await getList();
-        // _list.map(item=>{
-        //     item.update_time_text=Monent().format("L");
-        //     return item;
-        // })
-        // setList(_list);
+        let {data,count}=await GetList(options);
+        console.log('zzz',data);
+        if(!(count>options.page_end)){
+            setLoading(true);
+        }
+        setList(data);
     },[page]);
 
-    const getList=useHttpHook({url: apiUrl.articleList, method: 'post',body:option});
+    const GetList=(options)=>useHttpHook({url: apiUrl.articleList, method: 'post',body:options})();
 
 
     const onLoadMore=()=>{
-        setOption({
-            page_start:page*pageNum,
-            page_end:(page+1)*pageNum,
-        });
-        console.log('ssssssssssssssssssss',option);
-
+        setPage(page+1);
     };
     const loadMore =
         !initLoading && !loading ? (

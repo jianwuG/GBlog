@@ -18,12 +18,18 @@ class ArticleService extends Service {
     async list(params) {
         // 取n到m条记录的语句
         const {page_start,page_end}=params;
-        console.log('zzzzzzzzzzzzzzzzz',params);
         const sql = `select * from article limit ${page_start},${page_end}`
+        const countSql=`select  count(id) from article`;
         let _list = await this.app.mysql.query(sql);
+        const _count=await this.app.mysql.query(countSql);
+        console.log('1zzzzzzzzzzzzzzzzz',_list,_count[0]['count(id)']);
+
         if (_list) {
             return {
-                data: _list,
+                data: {
+                    data:_list,
+                    count:_count[0]['count(id)'],
+                },
                 status: 200,
                 msg: '获取列表成功'
             }
@@ -34,6 +40,29 @@ class ArticleService extends Service {
             }
 
         }
+    };
+
+    async detail(id){
+        let _item = await this.app.mysql.select('article',{
+
+            where:{
+                id
+            }
+        });
+        if(_item.length){
+            return{
+                status: 200,
+                msg: '获取详情成功',
+                data:_item[0]
+            }
+        }
+        else{
+            return{
+                status: 1000,
+                msg: '获取列表失败'
+            }
+        }
+
     }
 }
 

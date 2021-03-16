@@ -2,10 +2,13 @@ import React, {useRef, useEffect, useCallback} from 'react';
 import Head from 'next/head'
 import {Row, Col} from 'antd'
 import {UpCircleFilled} from '@ant-design/icons'
-import Header from './component/header'
-import List from './component/List'
-import Side from './component/Side'
-import useScroll from './hooks/useScroll'
+import {useScroll} from './hooks'
+import dynamic from 'next/dynamic'
+const List=dynamic(import('./component/List'));
+const Side=dynamic(import('./component/Side'));
+const Header=dynamic(import('./component/header'));
+
+
 
 import style from './style/home.module.scss'
 
@@ -25,7 +28,6 @@ const Home = () => {
                 </Col>
                 <Col span={5} className={style.showInfo} xs={0} sm={0} md={0} lg={5}>
                     <Side/>
-                    {top}
                 </Col>
 
             </Row>

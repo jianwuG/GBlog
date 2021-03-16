@@ -1,0 +1,26 @@
+@import "./../index.module.scss";
+
+.detailWrapper{
+  width: 100%;
+  @include w-h-center;
+  flex-direction: column;
+}
+.articleTitle{
+  font-size: 26px;
+  margin-top: 20px;
+
+}
+.articleHtml{
+  padding:16px;
+  width: 800px;
+  overflow: auto;
+  margin-top: 20px;
+  border: 1px solid #ededed;
+}
+
+.navMenu{
+  padding: 20px;
+  border: 1px solid #ededed;
+  margin-left: 10px;
+  margin-top: 80px;
+}

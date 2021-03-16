@@ -42,7 +42,7 @@ const useHttpHook = ({url, method = 'post', body = {},watch = []},headers) => {
                 }
             }).catch(err=>{
                 console.log('zzzzzzz',err);
-                message.error(err);
+                // message.error(err);
                 reject(err);
             }).finally(()=>{
                 // setLoading(false)
