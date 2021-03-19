@@ -42,11 +42,9 @@ const TagList = () => {
         dispatch(actionCreators.setType(type));
         dispatch(actionCreators.clickItem(item))
 
-        console.log('00000000000000', item);
     };
     const changeTagByItem = (item) => {
         dispatch(actionCreators.clickItem(item))
-        console.log('111111111111111', item);
     };
     const deleteTagItem = (id) => {
         Modal.confirm({
