@@ -10,4 +10,6 @@ module.exports = app => {
     router.post('/user/login', controller.admin.user.login);
     router.post('/article/add', controller.admin.article.add);
     router.post('/article/list', controller.admin.article.list);
+    router.post('/tag/add', controller.admin.tag.add);
+    router.get('/tag/list', controller.admin.tag.list);
 };
