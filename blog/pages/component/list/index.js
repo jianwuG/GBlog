@@ -1,16 +1,33 @@
 import React,{useState,useEffect} from 'react';
 import Router from 'next/router'
-import {Card,Tag} from 'antd'
+import {Card, Col, Tag} from 'antd'
 import Moment from 'moment'
+import marked from 'marked'
 
 import style from './index.module.scss'
 import {useHttpHook} from "./../../hooks";
 import BlogPath from "../../api/apiUrl";
+import hljs from "highlight.js";
+import 'highlight.js/styles/monokai-sublime.css';
 
 const List = () => {
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        highlight: function (code) {
+            return hljs.highlightAuto(code).value;
+        },
+        gfm: true, // 允许 Git Hub标准的markdown.
+        pedantic: false, // 不纠正原始模型任何的不良行为和错误（默认为false）
+        sanitize: false, // 对输出进行过滤（清理），将忽略任何已经输入的html代码（标签）
+        tables: true, // 允许支持表格语法（该选项要求 gfm 为true）
+        breaks: false, // 允许回车换行（该选项要求 gfm 为true）
+        smartLists: true, // 使用比原生markdown更时髦的列表
+        smartypants: false, // 使用更为时髦的标点
+    });
     const [list,setList]=useState([]);
     const [page,setPage]=useState(0);
     const [pageSize,setPageSize]=useState(10);
+    const [hasMore,setHasMore]=useState(false);
     useEffect(async ()=>{
         const options={
             page_start:page*pageSize,
@@ -18,8 +35,15 @@ const List = () => {
         };
 
         const {data,count}=await GetList(options);
-        setNewList(data);
-        console.log('11111111111111111111111111111',data);
+        data.map(item=>{
+            item.articleHtml=marked(item.mark.substring(0,100)).replace(/<pre>/g, "<pre category='hljs'>")
+        });
+        if(count>options.page_end){
+            setHasMore(true);
+        }else{
+            setHasMore(false);
+        }
+        setNewList(list.concat(data));
     },[page]);
 
     const setNewList=(data)=>{
@@ -40,6 +64,9 @@ const List = () => {
             }
         });
     };
+    const getMore=()=>{
+        setPage(page+1);
+    };
 
     return (
         <div className={style.listWrapper}>
@@ -52,9 +79,10 @@ const List = () => {
                         <div className={style.listItemLeft}>
                             <span className={style.title}>{item.title}</span>
                             <span className={style.marked}>{item.marked}</span>
+                            <div className={style.articleHtml} dangerouslySetInnerHTML={{__html: item.articleHtml}}></div>
                             <div className={style.time}>
                                 <span>{item.updateTime}</span>
-                                <Tag className={style.tag}>{item.tab}</Tag>
+                                <Tag className={style.tag}>{item.typeName}</Tag>
                             </div>
                         </div>
                         <div className={style.listItemRight}>
@@ -65,6 +93,9 @@ const List = () => {
 
                     </Card>
                 ))
+            }
+            {
+                hasMore&&<div className={style.loadMore} onClick={getMore}>加载更多</div>
             }
         </div>
     )

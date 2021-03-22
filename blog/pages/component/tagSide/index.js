@@ -1,14 +1,15 @@
 import React,{useState,useEffect} from 'react';
 import {Tag} from 'antd'
 import style from './index.module.scss'
+import {useHttpHook} from "../../hooks";
+import BlogPath from "../../api/apiUrl";
 
 const TagSide = () => {
     const [list,setList]=useState([])
     const tagColorList=['#f50','#2db7f5','#87d068','#108ee9'];
-    useEffect(()=>{
-        const _list=[{name:'axios',id:1},{name:'git',id:2},{name:'node.js',id:1},{name:'vue',id:2},{name:'react',id:1},{name:'ng2',id:2},
-            {name:'webpack',id:2}];
-        _list.map((item,index)=>{
+    useEffect(async ()=>{
+        const {data}=await GetList();
+        data.map((item,index)=>{
             let _color='';
             switch (index%4) {
                 case 0:
@@ -24,8 +25,9 @@ const TagSide = () => {
             }
             item.tagColor=_color;
         });
-        setList(_list)
+        setList(data)
     },[]);
+    const GetList=()=>useHttpHook({url: BlogPath.getLastTag, method: 'get'})();
     return (
         <div className={style.tagSideWrapper}>
             {

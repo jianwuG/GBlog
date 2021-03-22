@@ -18,3 +18,25 @@
   margin: 0 10px;
   cursor: pointer;
 }
+
+
+.sunClassWrapper{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .sunClassItem{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ededed;
+    height: 60px;
+    padding:0 20px;
+    justify-content: space-between;
+    &:nth-child(2n){
+      background: #fff;
+    }
+    &:nth-child(2n+1){
+      background: #ededed;
+
+    }
+  }
+}

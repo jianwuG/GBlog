@@ -24,7 +24,7 @@ const Header=()=>{
                 <MenuUnfoldOutlined size="30"/>
                 {/*<MenuFoldOutlined />*/}
             </Col>
-            <Col span={6} className={style.avatar}>
+            <Col span={6} className={style.avatar} onClick={()=>goPath('/')} >
                 <Avatar src={<Image src={userInfo.avatarUrl} />} />
                 <span style={{marginLeft:"10px"}}>{userInfo.name}</span>
             </Col>

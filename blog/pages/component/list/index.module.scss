@@ -2,6 +2,10 @@
 
 .listWrapper{
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom:60px;
 
 }
 
@@ -47,4 +51,15 @@
     }
 
   }
+}
+
+.loadMore{
+  width: 80px;
+  height: 48px;
+  @include w-h-center;
+  font-size: 16px;
+  border:1px solid #ccc;
+  background:#fff;
+  cursor: pointer;
+
 }

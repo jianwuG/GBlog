@@ -43,8 +43,11 @@ const TagList = () => {
         dispatch(actionCreators.clickItem(item))
 
     };
-    const changeTagByItem = (item) => {
+    const changeTagByItem = (type,item) => {
+        dispatch(actionCreators.setVisible(true));
         dispatch(actionCreators.clickItem(item))
+        dispatch(actionCreators.setType(type));
+
     };
     const deleteTagItem = (id) => {
         Modal.confirm({
@@ -55,13 +58,14 @@ const TagList = () => {
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-                console.log('OK');
+                dispatch(actionCreators.deleteItem(id))
             },
             onCancel() {
                 console.log('Cancel');
             },
         });
-    }
+
+    };
     return (
         <>
             <Button type='primary' size='large' onClick={() => addTag(1)}>新建一级</Button>
@@ -73,11 +77,14 @@ const TagList = () => {
                         list.map(item => (
                            <div className={style.tagItem}>
                                <div key={item.id} className={style.tagItemTitle} onClick={()=>openItem(item.id)}>
+
                                    <div>
                                        {
-                                           item.isOpen ? <UpOutlined style={{marginRight: "20px"}}/>
-                                               : <DownOutlined style={{marginRight: "20px"}}/>
+                                           item.sunClass.length>0&&(
+                                               item.isOpen ? <UpOutlined style={{marginRight: "20px"}}/>
+                                                   : <DownOutlined style={{marginRight: "20px"}}/>
 
+                                           )
                                        }
                                        {item.name}
                                    </div>
@@ -85,18 +92,32 @@ const TagList = () => {
                                        <PlusOutlined className={style.iconItem}
                                                      onClick={() => addTagByItem(2, item)}/>
                                        <EditOutlined className={style.iconItem}
-                                                     onClick={() => changeTagByItem(item)}
+                                                     onClick={() => changeTagByItem(3,item)}
                                        />
-                                       <DeleteOutlined className={style.iconItem}
-                                                       onClick={() => deleteTagItem(item.id)}
-                                       />
+                                       {/*<DeleteOutlined className={style.iconItem}*/}
+                                       {/*                onClick={() => deleteTagItem(item.id)}*/}
+                                       {/*/>*/}
                                    </div>
 
                                </div>
                                {
                                    item.isOpen &&
-                                   <div>
-
+                                   <div className={style.sunClassWrapper}>
+                                       {
+                                           item.sunClass&&item.sunClass.map(item=>(
+                                               <div key={item.id} className={style.sunClassItem}>
+                                                   <span>{item.name}</span>
+                                                    <div>
+                                                        <EditOutlined className={style.iconItem}
+                                                                      onClick={() => changeTagByItem(4,item)}
+                                                        />
+                                                        <DeleteOutlined className={style.iconItem}
+                                                                        onClick={() => deleteTagItem(item.id)}
+                                                        />
+                                                    </div>
+                                               </div>
+                                           ))
+                                       }
                                    </div>
                                }
                            </div>

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import {Row, Col, Input,Upload,Button,Space} from "antd";
+import React, {useState,useEffect,useRef} from 'react';
+import {Row, Col, Input,Upload,Button,Space,Cascader} from "antd";
+import {useSelector,useDispatch} from "react-redux";
 import './index.scss'
 import marked from 'marked'
 import hljs from "highlight.js";
@@ -8,6 +9,8 @@ import 'highlight.js/styles/monokai-sublime.css';
 import {UserOutlined, PictureOutlined} from "@ant-design/icons";
 import {useHttpHook} from "../../../hooks";
 import apiUrl from "../../../api/apiUrl";
+import {actionCreators} from "../../article/store";
+import {actionCreators as actionCreatorsTag} from "../../tag/store";
 
 
 const AddArticle = () => {
@@ -20,6 +23,8 @@ const AddArticle = () => {
 
     const [option,setOption]=useState(null);
     const { TextArea } = Input;
+    const dispatch=useDispatch();
+    const optionRef=useRef();
 
     marked.setOptions({
         renderer: new marked.Renderer(),
@@ -41,34 +46,76 @@ const AddArticle = () => {
         setArticleHtml(html)
     };
 
+    const getOptionValue=(value)=>{
+        const _selectValue=value[value.length-1];
+        let _seletcItem;
+        newTagList.map(item=>{
+           _seletcItem= item.sunClass&&item.sunClass.find(sonItem=>sonItem.value===_selectValue)
+        });
+        return _seletcItem.id
+    };
+
     const addArticle=async ()=>{
        const option={
            title,
-           firstPic,
+           firstPic:'',
            mark:articleMark,
-           type:typeName,
+           type:getOptionValue(optionRef.current.state.value),
            status:0,
            create_time:new Date().getTime(),
            update_time:new Date().getTime(),
        };
-        setOption({...option});
-        let result=await addArticleStatus();
-        console.log('add',result);
+       // console.log('zzzzzzzzzzzzzzzzz',option);
+        dispatch(actionCreators.addArticle(option))
 
     };
 
-    const addArticleStatus= useHttpHook({url: apiUrl.addArticle, method: 'post', body: {...option}});
+    const {tagList}=useSelector(state=>({
+        tagList: state.getIn(['tag', 'tagList']),
+    }));
+    const [newTagList,setNewTagList]=useState([]);
+
+    useEffect(() => {
+        dispatch(actionCreatorsTag.getList())
+    }, []);
+
+    useEffect(()=>{
+        let _list=tagList.toJS();
+        let _newList=[..._list];
+        _newList.map((item,index)=>{
+            item.value=item.name;
+            item.label=item.name;
+            if(item.sunClass){
+                item.children=[...item.sunClass];
+            }
+            item.children&&item.children.map(sonItem=>{
+                sonItem.value=sonItem.name;
+                sonItem.label=sonItem.name;
+            })
+        });
+
+
+        console.log('zzzzzzzzzzzzzzzzzz',_list,_newList);
+        setNewTagList(_newList);
+
+    },[tagList]);
+
+
 
     return (
         <>
             <div className='addArticle-wrapper'>
                 <Row className='addArticle-header'>
-                    <Col span={1} style={{textAlign:'center',cursor: "pointer"}} onClick={setFirstPic}>
-                        <Upload >
-                            <Button className='addArticle-upload' icon={<PictureOutlined />}></Button>
-                        </Upload>
+                    <Col span={2} style={{textAlign:'center',cursor: "pointer"}} onClick={setFirstPic}>
+                        {/*<Upload >*/}
+                        {/*    <Button className='addArticle-upload' icon={<PictureOutlined />}></Button>*/}
+                        {/*</Upload>*/}
+                        <Cascader
+                            options={newTagList}
+                            ref={optionRef}
+                        />
                     </Col>
-                    <Col span={18}>
+                    <Col span={17}>
                         <Input className='addArticle-input'
                                placeholder="输入文章标题。。。"
                                maxLength='40'

@@ -12,4 +12,6 @@ module.exports = app => {
     router.post('/article/list', controller.admin.article.list);
     router.post('/tag/add', controller.admin.tag.add);
     router.get('/tag/list', controller.admin.tag.list);
+    router.post('/tag/delete', controller.admin.tag.delete);
+    router.post('/tag/edit', controller.admin.tag.edit);
 };

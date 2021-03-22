@@ -20,9 +20,18 @@ class ArticleService extends Service {
         const {page_start,page_end}=params;
         const sql = `select * from article limit ${page_start},${page_end}`
         const countSql=`select  count(id) from article`;
+        const tagSql='select name,id from tag';
         let _list = await this.app.mysql.query(sql);
         const _count=await this.app.mysql.query(countSql);
-        console.log('1zzzzzzzzzzzzzzzzz',_list,_count[0]['count(id)']);
+        const _tagList=await this.app.mysql.query(tagSql);
+        _list.map( item=>{
+            _tagList.map(tagItem=>{
+                console.log('111111111111111',item.id===tagItem.id);
+                if(Number(item.type)===Number(tagItem.id)){
+                    item.typeName=tagItem.name
+                }
+            })
+        });
 
         if (_list) {
             return {

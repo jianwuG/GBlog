@@ -13,6 +13,17 @@ class TagController extends Controller {
         const result=await ctx.service.tag.list();
         ctx.body=result;
     }
+    async delete(){
+        const {ctx}=this;
+        const result=await ctx.service.tag.delete(parseInt(ctx.request.body.id));
+        ctx.body=result;
+    }
+
+    async edit(){
+        const {ctx}=this;
+        const result=await ctx.service.tag.edit(ctx.request.body);
+        ctx.body=result;
+    }
 }
 
 module.exports = TagController;

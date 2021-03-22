@@ -16,6 +16,7 @@ class ArticleController extends Controller {
 
         ctx.body =_list;
     }
+
 }
 
 module.exports = ArticleController;
