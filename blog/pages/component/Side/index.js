@@ -19,6 +19,9 @@ const Side = () => {
         };
         setTotalInfo(_totalInfo)
     }, []);
+    const goLink=(link)=>{
+        window.location.href=link;
+    };
     return (
         <>
             <Card
@@ -46,7 +49,7 @@ const Side = () => {
 
                 <div className={style.sideNet}>
                     <WechatFilled className={style.netItem}/>
-                    <WeiboCircleFilled className={style.netItem}/>
+                    <WeiboCircleFilled className={style.netItem} onClick={()=>goLink('https://weibo.com/3877926081/profile?rightmod=1&wvr=6&mod=personinfo')}/>
                     <GithubFilled className={style.netItem}/>
                     <AliwangwangFilled className={style.netItem}/>
                 </div>

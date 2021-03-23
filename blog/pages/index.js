@@ -7,6 +7,8 @@ import dynamic from 'next/dynamic'
 const List=dynamic(import('./component/List'));
 const Side=dynamic(import('./component/Side'));
 const Header=dynamic(import('./component/header'));
+import {Provider} from 'react-redux'
+import store from './store'
 
 
 
@@ -19,31 +21,33 @@ const Home = () => {
     const top=scrollInfo[1];
 
     return (
-        <div className={style.homeWrapper} ref={homeRef}>
-            <Head><title>主页 | JianWuG</title></Head>
-            <Header/>
-            <Row justify='center' className={style.homeContext}>
-                <Col span={10} className={style.List} xs={20} sm={20} md={20} lg={10}>
-                    <List/>
-                </Col>
-                <Col span={5} className={style.showInfo} xs={0} sm={0} md={0} lg={5}>
-                    <Side/>
-                </Col>
+       <Provider store={store}>
+           <div className={style.homeWrapper} ref={homeRef}>
+               <Head><title>主页 | JianWuG</title></Head>
+               <Header/>
+               <Row justify='center' className={style.homeContext}>
+                   <Col span={10} className={style.List} xs={20} sm={20} md={20} lg={10}>
+                       <List/>
+                   </Col>
+                   <Col span={5} className={style.showInfo} xs={0} sm={0} md={0} lg={5}>
+                       <Side/>
+                   </Col>
 
-            </Row>
-            {
-                Number(top) > 350 &&<UpCircleFilled  onClick={goTop} className={style.homeGoTop}/>
-            }
-            <style global jsx>{
-                ` 
+               </Row>
+               {
+                   Number(top) > 350 &&<UpCircleFilled  onClick={goTop} className={style.homeGoTop}/>
+               }
+               <style global jsx>{
+                   ` 
                  body{
                   overflow:hidden;
                  }
                 `
-              }
-            </style>
-        </div>
+               }
+               </style>
+           </div>
 
+       </Provider>
     )
 };
 export default Home;

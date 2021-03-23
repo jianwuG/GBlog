@@ -17,16 +17,22 @@ class ArticleService extends Service {
 
     async list(params) {
         // 取n到m条记录的语句
-        const {page_start,page_end}=params;
-        const sql = `select * from article limit ${page_start},${page_end}`
-        const countSql=`select  count(id) from article`;
-        const tagSql='select name,id from tag';
+        const {page_start,page_end,where}=params;
+        let sql,countSql,tagSql='select name,id from tag';
+        if(where){
+            sql = `select * from article where type=${where.type} limit ${page_start},${page_end}`;
+             countSql=`select  count(id) from article where type=${where.type}`;
+        }
+        else{
+             sql = `select * from article limit ${page_start},${page_end}`
+             countSql=`select  count(id) from article`;
+
+        }
         let _list = await this.app.mysql.query(sql);
         const _count=await this.app.mysql.query(countSql);
         const _tagList=await this.app.mysql.query(tagSql);
         _list.map( item=>{
             _tagList.map(tagItem=>{
-                console.log('111111111111111',item.id===tagItem.id);
                 if(Number(item.type)===Number(tagItem.id)){
                     item.typeName=tagItem.name
                 }

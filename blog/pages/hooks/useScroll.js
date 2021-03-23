@@ -5,7 +5,6 @@ const useScroll=(scrollRef)=>{
 
     const handleScroll=useCallback(()=>{
         const {scrollLeft,scrollTop}=scrollRef.current;
-        console.log('ppppp',{scrollLeft,scrollTop});
         setScrollInfo([scrollLeft,scrollTop])
     },[]);
 
@@ -14,9 +13,10 @@ const useScroll=(scrollRef)=>{
     }, []);
     useEffect(()=>{
         scrollRef.current.addEventListener('scroll',handleScroll,false);
-        // return ()=>{
-        //     scrollRef.current.removeEventListener('scroll',handleScroll,false);
-        // }
+        return ()=>{
+            scrollRef&&scrollRef.current&&scrollRef.current.removeEventListener('scroll',handleScroll,false);
+
+        }
     },[]);
     return [scrollInfo,goTop];
 };
