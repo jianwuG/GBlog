@@ -22,6 +22,7 @@ const List = () => {
         smartLists: true, // 使用比原生markdown更时髦的列表
         smartypants: false, // 使用更为时髦的标点
     });
+
     // const [list,setList]=useState([]);
     // const [page,setPage]=useState(0);
     // const [pageSize,setPageSize]=useState(10);
@@ -36,10 +37,9 @@ const List = () => {
             firstId: state.get('firstId'),
         }
     ),);
-
     let dispatch = useDispatch();
+
     useEffect(async () => {
-        console.log('ssssssssssssssssssssssssss', page);
         const options = {
             page_start: page * pageSize,
             page_end: (page + 1) * pageSize
@@ -49,13 +49,12 @@ const List = () => {
         } else {
             delete options.where
         }
-        const _list = list;
+        const _list = page===0?[]:list;
         dispatch(ActionCreators.setList(options, _list));
     }, [page]);
 
-    useEffect(async () => {
-        console.log('222222222222222222222', page);
 
+    useEffect(async () => {
         if (lastId) {
             dispatch(ActionCreators.setPage(0))
             const options = {

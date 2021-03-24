@@ -11,14 +11,19 @@ const Side = () => {
         name: 'JianWu'
     };
     const [totalInfo, setTotalInfo] = useState({});
-    useEffect(() => {
+    const [hitokoto,setHitokoto]=useState('');
+    useEffect(async () => {
         let _totalInfo = {
             articleNum: 30,
             tagNum: 10,
             readCount: 100
         };
-        setTotalInfo(_totalInfo)
-    }, []);
+        setTotalInfo(_totalInfo);
+        let body=await fetch('https://v1.hitokoto.cn').then(res=>{
+            return res.json()
+        });
+        setHitokoto(body.hitokoto||'')
+    },[]);
     const goLink=(link)=>{
         window.location.href=link;
     };
@@ -29,7 +34,8 @@ const Side = () => {
                 <Space size={[8, 12]} className={style.userInfo}>
                     <Avatar src={userInfo.avatarUrl} className={style.avatar}/>
                     <div className={style.name}>
-                        <span>{userInfo.name}</span>
+                        <span className={style.nameText}>{userInfo.name}</span>
+                        <span className={style.hitokoto}>{hitokoto}</span>
                     </div>
                     <Space split={<Divider type="vertical"/>}>
                         <div className={style.sideMenu}>
@@ -50,7 +56,7 @@ const Side = () => {
                 <div className={style.sideNet}>
                     <WechatFilled className={style.netItem}/>
                     <WeiboCircleFilled className={style.netItem} onClick={()=>goLink('https://weibo.com/3877926081/profile?rightmod=1&wvr=6&mod=personinfo')}/>
-                    <GithubFilled className={style.netItem}/>
+                    <GithubFilled className={style.netItem} onClick={()=>goLink('https://github.com/jianwuG')}/>
                     <AliwangwangFilled className={style.netItem}/>
                 </div>
                 <Divider plain>分类</Divider>

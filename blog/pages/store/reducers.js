@@ -9,6 +9,7 @@ const defaultState = fromJS({
         hasMore: false,
         lastId: null,
         firstId: null,
+        leftShow: false,
     }
 );
 export default (state = defaultState, action) => {
@@ -23,6 +24,8 @@ export default (state = defaultState, action) => {
             return state.set('lastId', action.id);
         case ActionTypes.SETFIRSTID:
             return state.set('firstId', action.id);
+        case ActionTypes.SETLEFTSHOW:
+            return state.set('leftShow',action.isShow)
         default:
             return state;
     }

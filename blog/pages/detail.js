@@ -11,6 +11,8 @@ import style from './style/detail.module.scss'
 import {Row, Col ,Affix, Icon ,Breadcrumb  } from 'antd'
 import {useHttpHook} from "./hooks";
 import BlogPath from "./api/apiUrl";
+import store from "./store";
+import {Provider} from "react-redux";
 const Header=dynamic(import('./component/header'));
 
 const Detail = ({router}) => {
@@ -42,29 +44,32 @@ const Detail = ({router}) => {
 
 
     return (
-        <div className={style.detailWrapper}>
-            <Head><title>详情111</title></Head>
-            <Header/>
-           <Row>
-               <Col>
-                   <div className={style.articleTitle}>{detail.title}</div>
-                   <div className={style.articleHtml} dangerouslySetInnerHTML={{__html: articleHtml}}></div>
-               </Col>
-               <Col>
-                   <Affix offsetTop={5}>
-                       <div className={style.navMenu}>
-                           <div className="nav-title">文章目录</div>
-                           <MarkNav
-                               className="article-menu"
-                               source={detail.mark}
-                               ordered={false}
-                           />
-                       </div>
-                   </Affix>
-               </Col>
-           </Row>
+        <Provider store={store}>
+            <div className={style.detailWrapper}>
+                <Head><title>详情111</title></Head>
+                <Header/>
+                <Row>
+                    <Col>
+                        <div className={style.articleTitle}>{detail.title}</div>
+                        <div className={style.articleHtml} dangerouslySetInnerHTML={{__html: articleHtml}}></div>
+                    </Col>
+                    <Col>
+                        <Affix offsetTop={5}>
+                            <div className={style.navMenu}>
+                                <div className="nav-title">文章目录</div>
+                                <MarkNav
+                                    className="article-menu"
+                                    source={detail.mark}
+                                    ordered={false}
+                                />
+                            </div>
+                        </Affix>
+                    </Col>
+                </Row>
 
-        </div>
+            </div>
+        </Provider>
+
     )
 };
 export default withRouter(Detail);

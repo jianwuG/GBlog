@@ -14,7 +14,8 @@ const useScroll=(scrollRef)=>{
     useEffect(()=>{
         scrollRef.current.addEventListener('scroll',handleScroll,false);
         return ()=>{
-            scrollRef&&scrollRef.current&&scrollRef.current.removeEventListener('scroll',handleScroll,false);
+            scrollRef&&scrollRef.current&&
+            scrollRef.current.removeEventListener('scroll',handleScroll,false);
 
         }
     },[]);

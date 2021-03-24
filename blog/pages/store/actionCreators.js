@@ -16,7 +16,7 @@ export const setList = (options,list = []) => {
         });
         dispatch(setListInfo(list.concat(data)));
         dispatch(setMore(count>options.page_end));
-        console.log('zzzzzzzzz', data, count);
+        console.log('zzzzzzzzz', data, count,list);
     }
 };
 
@@ -50,14 +50,19 @@ export const setFirstId=(id)=>{
         id
     }
 };
+export const setLeftShow=(isShow)=>{
+    return{
+        type:ActionTypes.SETLEFTSHOW,
+        isShow
+    }
+}
 
 export const initData=(option)=>{
     return (dispatch)=>{
         dispatch(setFirstId(null));
         dispatch(setLastId(null));
         dispatch(setPage(0));
-        dispatch(setList(option));
-        console.log('sssssssssssssssss');
+        dispatch(setList(option,[]));
     }
 };
 const GetList = (options) => useHttpHook({url: BlogPath.articleList, method: 'post', body: options})();
