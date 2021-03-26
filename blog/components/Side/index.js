@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {Card, Avatar, Space, Divider} from "antd";
 import {WechatFilled, WeiboCircleFilled, GithubFilled, AliwangwangFilled} from '@ant-design/icons'
-import Category from './../Category'
-import TagSide from './../tagSide'
+import Category from '../category'
+import TagSide from '../tagSide'
 import style from './index.module.scss'
 
 const Side = () => {

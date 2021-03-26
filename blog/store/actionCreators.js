@@ -1,5 +1,5 @@
-import {useHttpHook} from "../hooks";
-import BlogPath from "../api/apiUrl";
+import {useHttpHook} from "./../hooks";
+import BlogPath from "./../pages/api/apiUrl";
 import {fromJS} from 'immutable';
 import * as ActionTypes from './actionTypes'
 import marked from 'marked'
@@ -66,3 +66,4 @@ export const initData=(option)=>{
     }
 };
 const GetList = (options) => useHttpHook({url: BlogPath.articleList, method: 'post', body: options})();
+

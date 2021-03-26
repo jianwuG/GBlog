@@ -1,20 +1,18 @@
-import React, {useRef, useState} from 'react';
-import {useSelector,useDispatch} from "react-redux";
-import * as ActionCreators from './store/actionCreators'
+import React, {useRef} from 'react';
 import Head from 'next/head'
-import {Row,Col,Drawer,Button} from 'antd'
+import {Row,Col} from 'antd'
 import {UpCircleFilled} from '@ant-design/icons'
 import dynamic from 'next/dynamic'
 import {Provider} from 'react-redux'
-const List = dynamic(import('./component/List'));
-const Side = dynamic(import('./component/Side'));
-const Header = dynamic(import('./component/header'));
-const FootBar = dynamic(import('./component/footBar'));
-import {useScroll} from './hooks'
-import store from './store'
+const List = dynamic(import('./../components/list'));
+const Side = dynamic(import('./../components/Side'));
+const Header = dynamic(import('./../components/header'));
+const FootBar = dynamic(import('./../components/footBar'));
+import {useScroll} from '../hooks'
+import store from './../store'
 import style from './style/home.module.scss'
 
-const Home = () => {
+export default function Home(){
     const homeRef = useRef(null);
     const [scrollInfo, goTop] = useScroll(homeRef);
     const top = scrollInfo[1];
@@ -53,4 +51,3 @@ const Home = () => {
         </Provider>
     )
 };
-export default Home;

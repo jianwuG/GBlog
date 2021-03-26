@@ -47,11 +47,15 @@ const AddArticle = () => {
     };
 
     const getOptionValue=(value)=>{
-        const _selectValue=value[value.length-1];
+        const _firstValue=value[0];
+        const _selectValue=value[1];
         let _seletcItem;
-        newTagList.map(item=>{
-           _seletcItem= item.sunClass&&item.sunClass.find(sonItem=>sonItem.value===_selectValue)
-        });
+        const _selectFirstItem=newTagList.find(item=>item.name===_firstValue);
+
+        if(_selectFirstItem){
+            _seletcItem= _selectFirstItem.sunClass&&_selectFirstItem.sunClass.find(item=>item.value=_selectValue)
+        }
+
         return _seletcItem.id
     };
 

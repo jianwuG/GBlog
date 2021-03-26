@@ -4,7 +4,7 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-    const { router, controller } = app;
+    const { router, controller,swagger } = app;
     router.get('/admin/index', controller.admin.admin.index);
     router.get('/admin/cc', controller.admin.admin.cc);
     router.post('/user/login', controller.admin.user.login);

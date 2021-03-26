@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev ",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 80"
   },
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
@@ -33,5 +33,6 @@
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "sass": "^1.32.8"
-  }
+  },
+  "homepage": "./"
 }

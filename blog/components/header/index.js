@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Row, Col, Avatar, Image, Space, Button, Drawer} from 'antd'
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons'
+import {MenuUnfoldOutlined} from '@ant-design/icons'
 import Router from 'next/router'
 import * as ActionCreators from "../../store/actionCreators";
 import {useDispatch, useSelector} from "react-redux";
-import Side from './../../component/Side'
+import Side from '../Side'
 import style from './index.module.scss'
 
 const Header = () => {

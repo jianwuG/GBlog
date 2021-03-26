@@ -13,8 +13,8 @@ module.exports = appInfo => {
     const config = exports = {};
     exports.cluster = {
         listen: {
-            port: 80,
-            hostname: '127.0.0.1',
+            port: 7003,
+            hostname: '0.0.0.0',
         },
     };
 
@@ -69,6 +69,52 @@ module.exports = appInfo => {
     //
     //
     // }
+    config.swagger2 = {
+        enable: false, // 禁用swagger , 默认为true
+        base: {
+            /* default config,support cover
+            schemes: [
+                'http',
+            ],
+            host: '127.0.0.1:7001',
+            basePath: '/',
+            consumes: [
+            'application/json',
+            ],
+            produces: [
+            'application/json',
+            ],
+            */
+            info: {
+                description: '文档介绍',
+                version: '1.0.0',
+                title: '文档名称',
+                contact: {
+                    email: 'caandoll@aliyun.com',
+                },
+                license: {
+                    name: 'Apache 2.0',
+                    url: 'http://www.apache.org/licenses/LICENSE-2.0.html',
+                },
+            },
+            tags: [{
+                name: 'admin',
+                description: 'Admin desc',
+            },
+                {
+                    name: 'role',
+                    description: 'Role desc',
+                },
+            ],
+            definitions: {
+                // model definitions
+            },
+            securityDefinitions: {
+                // security definitions
+            }
+        },
+    };
+
     config.security = {
         csrf: {
             enable: false

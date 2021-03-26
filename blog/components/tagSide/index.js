@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react';
-import {useSelector,useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Tag} from 'antd'
 import style from './index.module.scss'
 import {useHttpHook} from "../../hooks";
-import BlogPath from "../../api/apiUrl";
-import * as ActionCreators from './../../store/actionCreators'
+import BlogPath from "../../pages/api/apiUrl";
+import * as ActionCreators from '../../store/actionCreators'
 
 const TagSide = () => {
     const [list,setList]=useState([])

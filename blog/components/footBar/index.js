@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useInterval} from './../../hooks'
+import React, { useState} from 'react';
+import {useInterval} from '../../hooks'
 import style from './index.module.scss'
 
 

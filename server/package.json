@@ -10,7 +10,8 @@
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-mysql": "^3.0.0",
-    "egg-scripts": "^2.11.0",
+    "egg-scripts": "^2.13.0",
+    "egg-swagger2": "^1.0.4",
     "moment": "^2.29.1"
   },
   "devDependencies": {
@@ -26,7 +27,7 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-51la-web-egg --workers=2  --port=3003",
+    "start": "egg-scripts start --port=80 --daemon --title=egg-server-showcase",
     "stop": "egg-scripts stop --title=egg-server-init",
     "dev": "egg-bin dev -port=3005",
     "debug": "egg-bin debug",

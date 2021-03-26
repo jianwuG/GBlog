@@ -8,12 +8,12 @@ import marked from 'marked'
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import style from './style/detail.module.scss'
-import {Row, Col ,Affix, Icon ,Breadcrumb  } from 'antd'
-import {useHttpHook} from "./hooks";
+import {Row, Col ,Affix} from 'antd'
+import {useHttpHook} from "../hooks";
 import BlogPath from "./api/apiUrl";
-import store from "./store";
+import store from "./../store";
 import {Provider} from "react-redux";
-const Header=dynamic(import('./component/header'));
+const Header=dynamic(import('../components/header'));
 
 const Detail = ({router}) => {
     const [detail, setDetail] = useState({});

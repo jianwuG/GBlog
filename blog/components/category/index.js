@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Card,Space} from 'antd'
 import style from './index.module.scss'
 import {useHttpHook} from "../../hooks";
-import BlogPath from "../../api/apiUrl";
+import BlogPath from "../../pages/api/apiUrl";
 import * as ActionCreators from "../../store/actionCreators";
 import {useDispatch} from "react-redux";
 

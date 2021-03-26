@@ -20,3 +20,7 @@ exports.cors={
     enable:true,
     package:'egg-cors'
 };
+exports.swagger2 = {
+    enable: true,
+    package: 'egg-swagger2',
+};

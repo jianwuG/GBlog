@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import Router from 'next/router'
-import {Card, Col, Tag} from 'antd'
+import {Card, Tag} from 'antd'
 import style from './index.module.scss'
 import marked from 'marked'
 import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
-import * as ActionCreators from './../../store/actionCreators'
+import * as ActionCreators from '../../store/actionCreators'
 
 const List = () => {
     marked.setOptions({
@@ -23,10 +23,6 @@ const List = () => {
         smartypants: false, // 使用更为时髦的标点
     });
 
-    // const [list,setList]=useState([]);
-    // const [page,setPage]=useState(0);
-    // const [pageSize,setPageSize]=useState(10);
-    // const [hasMore,setHasMore]=useState(false);
     const {page, pageSize, hasMore, list, lastId, firstId} = useSelector(state => (
         {
             page: state.get('page'),

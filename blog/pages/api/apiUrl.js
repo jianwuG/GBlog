@@ -1,4 +1,4 @@
-const defaultUrl='http://127.0.0.1:80';
+const defaultUrl='http://121.199.43.185:7004';
 
 const BlogPath={
     articleList:defaultUrl+'/blog/article/list', //blog文章列表
