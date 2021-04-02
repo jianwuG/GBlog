@@ -48,12 +48,12 @@ const Detail = ({router}) => {
             <div className={style.detailWrapper}>
                 <Head><title>详情111</title></Head>
                 <Header/>
-                <Row>
-                    <Col>
+                <Row className={style.rowWrapper}>
+                    <Col span={20} xs={22} sm={22} md={20} lg={20}>
                         <div className={style.articleTitle}>{detail.title}</div>
                         <div className={style.articleHtml} dangerouslySetInnerHTML={{__html: articleHtml}}></div>
                     </Col>
-                    <Col>
+                    <Col span={4} xs={0} sm={0} md={0} lg={4}>
                         <Affix offsetTop={5}>
                             <div className={style.navMenu}>
                                 <div className="nav-title">文章目录</div>

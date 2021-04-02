@@ -4,6 +4,12 @@
   width: 100%;
   @include w-h-center;
   flex-direction: column;
+  background: #ededed;
+}
+.rowWrapper{
+  display: flex;
+  flex-direction: row;
+  width: 70%;
 }
 .articleTitle{
   font-size: 26px;
@@ -12,10 +18,10 @@
 }
 .articleHtml{
   padding:16px;
-  width: 800px;
   overflow: auto;
   margin-top: 20px;
   border: 1px solid #ededed;
+  background: #fff;
 }
 
 .navMenu{
