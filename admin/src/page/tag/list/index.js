@@ -1,42 +1,48 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {Button, Modal} from 'antd';
+import {Button, Modal, Table} from 'antd';
 import {actionCreators} from './../store'
 import {
     PlusOutlined, EditOutlined, DeleteOutlined,
     ExclamationCircleOutlined, UpOutlined, DownOutlined
 } from '@ant-design/icons'
-import ModalDiv from './../component/modalDiv'
+import ModalDiv from '../component/modalDiv/modalDiv'
+import {tagQuery} from './../../../config/tableColumns'
 import style from './index.module.scss'
 
 const TagList = () => {
     const dispatch = useDispatch();
-    const [list,setList]=useState([]);
-
-    const {visible, tagList} = useSelector(state => ({
-        visible: state.getIn(['tag', 'visible']),
-        tagList: state.getIn(['tag', 'tagList']),
-    }));
-    useEffect(() => {
-        dispatch(actionCreators.getList())
-    }, []);
-    useEffect(()=>{
-        setList(tagList.toJS())
-    },[tagList]);
-
-    const openItem=(id)=>{
-        let _list=[...list];
-        _list.map(item=>{
-            if(item.id===id){
-                item.isOpen=!item.isOpen;
-            }
-        });
-        setList(_list);
-    };
+    const [list, setList] = useState([]);
+    const [flagLoading, setFlagLoading] = useState(false);
+    const nestedTagQuery = [
+        {title: 'ID', dataIndex: 'id', key: 'id'},
+        {title: '名称', dataIndex: 'name', key: 'name'},
+        {title: '更新时间', dataIndex: 'updateTimeText', key: 'updateTimeText'},
+        {
+            title: '操作',
+            dataIndex: 'operation',
+            key: 'operation',
+            render: record=> (
+                <div size="middle" className={style.iconStyle}>
+                    <a onClick={() => cc(record)}>
+                        <EditOutlined/>
+                        <span>修改</span>
+                    </a>
+                    <a onClick={(record) => cc(record)}>
+                        <DeleteOutlined/>
+                        <span>删除</span>
+                    </a>
+                </div>
+            ),
+        },
+    ];
     const addTag = (type) => {
         dispatch(actionCreators.setVisible(true));
         dispatch(actionCreators.setType(type))
     };
+    const cc=(record)=>{
+        console.log('zzzzzzzzzzz11111111',record)
+    }
     const addTagByItem = (type, item) => {
         dispatch(actionCreators.setVisible(true));
         dispatch(actionCreators.setType(type));
@@ -66,73 +72,35 @@ const TagList = () => {
         });
 
     };
+    const {visible, tagList} = useSelector(state => ({
+        visible: state.getIn(['tag', 'visible']),
+        tagList: state.getIn(['tag', 'tagList']),
+    }));
+    useEffect(() => {
+        setFlagLoading(true)
+        dispatch(actionCreators.getList())
+        setFlagLoading(false)
+    }, []);
+    useEffect(() => {
+        setList(tagList.toJS())
+    }, [tagList]);
     return (
         <>
-            <Button type='primary' size='large' onClick={() => addTag(1)}>新建一级</Button>
-
-            {
-                list &&
-                <div className={style.tagWrapper}>
-                    {
-                        list.map(item => (
-                           <div className={style.tagItem}>
-                               <div key={item.id} className={style.tagItemTitle} onClick={()=>openItem(item.id)}>
-
-                                   <div>
-                                       {
-                                           item.sunClass.length>0&&(
-                                               item.isOpen ? <UpOutlined style={{marginRight: "20px"}}/>
-                                                   : <DownOutlined style={{marginRight: "20px"}}/>
-
-                                           )
-                                       }
-                                       {item.name}
-                                   </div>
-                                   <div>
-                                       <PlusOutlined className={style.iconItem}
-                                                     onClick={() => addTagByItem(2, item)}/>
-                                       <EditOutlined className={style.iconItem}
-                                                     onClick={() => changeTagByItem(3,item)}
-                                       />
-                                       {/*<DeleteOutlined className={style.iconItem}*/}
-                                       {/*                onClick={() => deleteTagItem(item.id)}*/}
-                                       {/*/>*/}
-                                   </div>
-
-                               </div>
-                               {
-                                   item.isOpen &&
-                                   <div className={style.sunClassWrapper}>
-                                       {
-                                           item.sunClass&&item.sunClass.map(item=>(
-                                               <div key={item.id} className={style.sunClassItem}>
-                                                   <span>{item.name}</span>
-                                                    <div>
-                                                        <EditOutlined className={style.iconItem}
-                                                                      onClick={() => changeTagByItem(4,item)}
-                                                        />
-                                                        <DeleteOutlined className={style.iconItem}
-                                                                        onClick={() => deleteTagItem(item.id)}
-                                                        />
-                                                    </div>
-                                               </div>
-                                           ))
-                                       }
-                                   </div>
-                               }
-                           </div>
-                        ))
-                    }
-                </div>
-
-            }
-
-            {
-                visible && <ModalDiv/>
-            }
+            <Table
+                className={style.tableItem}
+                columns={tagQuery}
+                loading={flagLoading}
+                expandable={{
+                    expandedRowRender: record => <Table columns={nestedTagQuery} dataSource={record.sunClass}
+                                                        pagination={false}/>,
+                    rowExpandable: record => record.sunClass.length > 0,
+                }}
+                rowKey="id"
+                dataSource={list}
+                expandRowByClick={true}
+            />
         </>
     )
-};
+}
 
-
-export default TagList;
+export default TagList

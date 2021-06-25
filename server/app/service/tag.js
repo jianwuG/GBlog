@@ -55,7 +55,6 @@ class TagService extends Service {
     }
     async delete(id){
         let result= await this.app.mysql.delete('tag',{ id:id });
-        console.log('11111111111111',result);
         return{
             data:{
                 msg:'删除成功',
@@ -75,7 +74,6 @@ class TagService extends Service {
          }
          else{
              let result= await this.app.mysql.update('tag',params);
-             console.log('11111111111111',result);
              return{
                  data:{
                      msg:'修改成功',

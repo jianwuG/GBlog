@@ -13,8 +13,13 @@ module.exports = appInfo => {
     const config = exports = {};
     exports.cluster = {
         listen: {
-            port: 7003,
-            hostname: '0.0.0.0',
+            // 线上环境
+            // port: 7003,
+            // hostname: '0.0.0.0',
+
+            //开发
+            port: 80,
+            hostname: '127.0.0.1',
         },
     };
 
@@ -34,10 +39,10 @@ module.exports = appInfo => {
         app: true,//是否挂载
         agent: false,
         client: {
-            host: 'localhost',
+            host: '121.199.43.185',
             port: '3306',
-            user: 'jianwu',
-            password: '12345678',
+            user: 'gaowen',
+            password: 'GW123456',
             database: 'jianwu_blog'
         },
 
@@ -70,9 +75,8 @@ module.exports = appInfo => {
     //
     // }
     config.swagger2 = {
-        enable: false, // 禁用swagger , 默认为true
+        enable: true, // 禁用swagger , 默认为true
         base: {
-            /* default config,support cover
             schemes: [
                 'http',
             ],
@@ -84,7 +88,6 @@ module.exports = appInfo => {
             produces: [
             'application/json',
             ],
-            */
             info: {
                 description: '文档介绍',
                 version: '1.0.0',

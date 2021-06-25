@@ -21,8 +21,8 @@ const ProjectList=()=>{
                 <Button type='primary' size="large">新建</Button>
                 <Row gutter={16}  >
                     {
-                        projectList&&projectList.map(item=>(
-                            <Col span={6} className="project-wrapper">
+                        projectList&&projectList.map((item,index)=>(
+                            <Col span={6} className="project-wrapper" key={item.title+index}>
                                 <Card title={item.title} bordered={true} className='project-wrapper-item' hoverable={true} cover={  <img
                                     alt="example"
                                     src={item.url}

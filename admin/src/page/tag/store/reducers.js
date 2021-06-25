@@ -7,6 +7,7 @@ const defaultState=fromJS({
     tagList:[],
     type:1, //1 一级分类添加 2 二级分类添加
     clickItem:{},
+    flagLoading:false, //加载
 });
 export default (state = defaultState,action)=>{
     switch (action.type) {

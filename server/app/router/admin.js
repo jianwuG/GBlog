@@ -14,4 +14,5 @@ module.exports = app => {
     router.get('/tag/list', controller.admin.tag.list);
     router.post('/tag/delete', controller.admin.tag.delete);
     router.post('/tag/edit', controller.admin.tag.edit);
+    router.get('/menuList/list', controller.admin.menuList.list);
 };

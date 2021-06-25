@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {useSelector} from "react-redux";
 import Monent from 'moment'
-import {Row, Col, List, Skeleton, Space, Button,Image,Tag } from 'antd'
+import {Row, Col, List, Skeleton, Space, Button,Image,Tag ,Table } from 'antd'
 import {EditOutlined,DeleteOutlined,ToTopOutlined} from '@ant-design/icons'
 import './index.scss'
 import {useHttpHook} from "../../../hooks";
@@ -80,7 +80,7 @@ const ArticleList = () => {
                   bordered
                   dataSource={articleList}
                   renderItem={item => (
-                      <List.Item className="list-item" style={{borderBottom:"1px solid #ddd"}}>
+                      <List.Item className="list-item" style={{borderBottom:"1px solid #ddd"}} key={item.title}>
                           <Skeleton avatar title={false} loading={item.loading} active>
                               <Row className="list-div" wrap="true" justify="center" align="middle" >
                                   <Col span={7}>

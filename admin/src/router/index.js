@@ -3,7 +3,7 @@ import {Provider} from 'react-redux'
 
 import {HashRouter as Router, Route} from "react-router-dom";
 import store from './../store'
-import Home from './../layout'
+import LayoutPage from './../layout'
 import Login from './../page/login'
 
 
@@ -13,8 +13,8 @@ function Main() {
             <Provider store={store}>
                 <Router>
                     <Route path="/login/" exact component={Login}/>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/index/"  component={Home}/>
+                    <Route path="/" exact component={LayoutPage}/>
+                    <Route path="/index/"  component={LayoutPage}/>
                 </Router>
             </Provider>
         </>

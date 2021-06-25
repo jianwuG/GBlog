@@ -3,6 +3,7 @@ import {message} from "antd";
 import {fromJS} from 'immutable'
 import {useHttpHook} from './../../../hooks'
 import apiUrl from "../../../api/apiUrl";
+import dayjs from 'dayjs'
 
 //设置是否显示编辑弹窗
 export const setVisible = (value) => {
@@ -27,11 +28,15 @@ export const addTagList = (options) => {
 export const getList = () => {
     return async (dispatch) => {
         const {data} = await GetTagList()();
-        console.log('llllllllllllllllllllllllllllllll1111', data);
-
         if (data) {
-            data.map(item => {
+            data&&data.map(item => {
                 item.isOpen = false;
+                item.createTimeText=dayjs(item.create_time).format('YYYY/MM/DD')
+                item.updateTimeText=dayjs(item.update_time).format('YYYY/MM/DD HH:mm:ss')
+                item.sunClass&&item.sunClass.map(sunItem=>{
+                    sunItem.createTimeText=dayjs(sunItem.create_time).format('YYYY/MM/DD')
+                    sunItem.updateTimeText=dayjs(sunItem.update_time).format('YYYY/MM/DD HH:mm:ss')
+                })
                 return item;
             });
             dispatch(setList(data))

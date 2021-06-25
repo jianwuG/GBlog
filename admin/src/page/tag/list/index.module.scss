@@ -1,42 +1,18 @@
-.tagWrapper{
-  padding: 20px;
+.tableItem{
+  margin-top: 60px;
 }
-.tagItem{
-  display: flex;
-  flex-direction: column;
-  .tagItemTitle{
-    display: flex;
-    height: 80px;
-    border: 1px solid #ededed;
-    align-items: center;
-    padding:0 20px;
-    justify-content: space-between;
-    cursor: pointer;
-  }
-}
-.iconItem{
-  margin: 0 10px;
-  cursor: pointer;
-}
-
-
-.sunClassWrapper{
+.iconStyle{
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
-  .sunClassItem{
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ededed;
-    height: 60px;
-    padding:0 20px;
-    justify-content: space-between;
-    &:nth-child(2n){
-      background: #fff;
-    }
-    &:nth-child(2n+1){
-      background: #ededed;
-
-    }
-  }
+}
+.iconStyle a{
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  margin-top: 10px;
+}
+.iconStyle a span{
+  margin-left: 6px;
 }
