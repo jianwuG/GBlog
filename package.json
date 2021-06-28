@@ -1,11 +1,17 @@
 {
+  "name": "blog",
+  "version": "1.0.0",
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.js": "eslint --fix"
+    "*": [
+      "eslint",
+      "git add"
+    ]
   },
   "dependencies": {
     "create-react-app": "^4.0.3",
