@@ -12,7 +12,8 @@
 /build
 /.idea
 .idea
-*commit-msg
+.husky/commit-msg
+
 # misc
 .DS_Store
 .env.local
