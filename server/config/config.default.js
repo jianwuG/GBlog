@@ -13,13 +13,13 @@ module.exports = appInfo => {
     const config = exports = {};
     exports.cluster = {
         listen: {
-            // 线上环境
-            // port: 7003,
-            // hostname: '0.0.0.0',
+            //线上环境
+            port: 7003,
+            hostname: '0.0.0.0',
 
-            //开发
-            port: 80,
-            hostname: '127.0.0.1',
+            // //开发
+            //  port: 80,
+            //  hostname: '127.0.0.1',
         },
     };
 
@@ -39,11 +39,12 @@ module.exports = appInfo => {
         app: true,//是否挂载
         agent: false,
         client: {
-            host: '121.199.43.185',
+
+            host: '127.0.0.1',
             port: '3306',
-            user: 'gaowen',
-            password: 'GW123456',
-            database: 'jianwu_blog'
+            username: 'jianwu',
+            password: '12345678',
+            database: 'jianwu_blog',
         },
 
     };
@@ -83,10 +84,10 @@ module.exports = appInfo => {
             host: '127.0.0.1:7001',
             basePath: '/',
             consumes: [
-            'application/json',
+                'application/json',
             ],
             produces: [
-            'application/json',
+                'application/json',
             ],
             info: {
                 description: '文档介绍',
