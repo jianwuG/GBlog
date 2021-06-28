@@ -1,15 +1,13 @@
 {
   "name": "blog",
   "version": "1.0.0",
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "*": [
       "git add"
     ]
+  },
+  "scripts": {
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@commitlint/cli": "^12.1.4",
