@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E $HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
     "*": [
-      "eslint",
       "git add"
     ]
   },
   "dependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "create-react-app": "^4.0.3",
     "css-loader": "^5.1.2",
     "flexible": "^0.1.20",
