@@ -1,5 +1,5 @@
-const defaultUrl='http://121.199.43.185:7004';
-// const defaultUrl='http://127.0.0.1:80';
+// const defaultUrl='http://121.199.43.185:7004';
+const defaultUrl='http://127.0.0.1:80';
 
 const AdminPath={
     login:defaultUrl+'/user/login', //登录

@@ -1,4 +1,12 @@
 {
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
   "dependencies": {
     "create-react-app": "^4.0.3",
     "css-loader": "^5.1.2",
@@ -6,5 +14,9 @@
     "next-compose-plugins": "^2.2.1",
     "node-sass": "^5.0.0",
     "reset-css": "^5.0.1"
-  }
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0"
+  },
 }
