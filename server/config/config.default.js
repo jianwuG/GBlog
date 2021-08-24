@@ -13,13 +13,13 @@ module.exports = appInfo => {
     const config = exports = {};
     exports.cluster = {
         listen: {
-            //线上环境
-            port: 7003,
-            hostname: '0.0.0.0',
+            // //线上环境
+            // port: 7003,
+            // hostname: '0.0.0.0',
 
-            // //开发
-            //  port: 80,
-            //  hostname: '127.0.0.1',
+            //开发
+             port: 80,
+             hostname: '127.0.0.1',
         },
     };
 
