@@ -7,7 +7,8 @@
     ]
   },
   "scripts": {
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -20,7 +21,7 @@
     "reset-css": "^5.0.1"
   },
   "devDependencies": {
-    "husky": "^6.0.0",
+    "husky": "^7.0.0",
     "lint-staged": "^11.0.0"
   }
 }
