@@ -97,9 +97,6 @@ const AddArticle = () => {
                 sonItem.label=sonItem.name;
             })
         });
-
-
-        console.log('zzzzzzzzzzzzzzzzzz',_list,_newList);
         setNewTagList(_newList);
 
     },[tagList]);

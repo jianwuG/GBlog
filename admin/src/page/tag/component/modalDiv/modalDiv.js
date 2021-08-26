@@ -71,7 +71,6 @@ const ModalDiv = () => {
 
         }
         else if(type===2){
-            console.log('zzzzzzz',clickItem)
             options={
                 name:firstRef.current.state.value,
                 p_id:clickItem.toJS().id,

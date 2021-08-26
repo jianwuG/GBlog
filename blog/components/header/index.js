@@ -35,8 +35,6 @@ const Header = () => {
     }, []);
     const openMenu = () => {
         dispatch(ActionCreators.setLeftShow(true))
-        console.log('zzzzzzzzzzzzzzzzzzzzzz');
-
     };
 
     const goPath = (path) => {
