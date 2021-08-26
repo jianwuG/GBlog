@@ -3,8 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {Button, Modal, Table} from 'antd';
 import {actionCreators} from './../store'
 import {
-     EditOutlined, DeleteOutlined,
-    ExclamationCircleOutlined,PlusOutlined
+    ExclamationCircleOutlined
 } from '@ant-design/icons'
 import style from './index.module.scss'
 import {useList} from "../../../hooks";
@@ -26,11 +25,9 @@ const TagList = () => {
             render: (record,text)=> (
                 <div size="middle" className={style.iconStyle}>
                     <a onClick={() => changeTagByItem(4,text)}>
-                        <EditOutlined/>
                         <span>修改</span>
                     </a>
                     <a onClick={(record) => deleteTagItem(text.id)}>
-                        <DeleteOutlined/>
                         <span>删除</span>
                     </a>
                 </div>
@@ -49,7 +46,6 @@ const TagList = () => {
             render: (record,text)=> (
                 <div size="middle" className={style.iconStyle}>
                     <a onClick={(e) => addTagByItem(2,text,e)}>
-                        <PlusOutlined/>
                         <span>增加</span>
                     </a>
                     {/*<a onClick={(record) => deleteTagItem(text.id)}>*/}

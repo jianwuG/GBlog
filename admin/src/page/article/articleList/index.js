@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import moment from 'moment'
 import {Table } from 'antd'
-import {EditOutlined,DeleteOutlined,ToTopOutlined} from '@ant-design/icons'
 import './index.scss'
 import {useHttpHook,useList} from "../../../hooks";
 import apiUrl from "../../../api/apiUrl";
@@ -25,15 +24,12 @@ const ArticleList = () => {
             render: (record,text)=> (
                 <div size="middle" className={style.iconStyle}>
                     <a onClick={()=>{console.log('1111111',text)}}>
-                        <EditOutlined/>
                         <span>修改</span>
                     </a>
                     <a onClick={()=>{}}>
-                        <DeleteOutlined/>
                         <span>删除</span>
                     </a>
                     <a onClick={()=>{}}>
-                        <ToTopOutlined/>
                         <span>置顶</span>
                     </a>
                 </div>
