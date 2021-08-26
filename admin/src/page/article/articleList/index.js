@@ -1,121 +1,70 @@
 import React, {useState,useEffect} from 'react';
-import {useSelector} from "react-redux";
-import Monent from 'moment'
-import {Row, Col, List, Skeleton, Space, Button,Image,Tag ,Table } from 'antd'
-import {EditOutlined,DeleteOutlined,ToTopOutlined} from '@ant-design/icons'
+import moment from 'moment'
+import {Table } from 'antd'
 import './index.scss'
-import {useHttpHook} from "../../../hooks";
+import {useHttpHook,useList} from "../../../hooks";
 import apiUrl from "../../../api/apiUrl";
+import style from "../../tag/list/index.module.scss";
 
 
 const ArticleList = () => {
     const [articleList, setList] = useState([]);
-    const [page,setPage]=useState(0);
-    const [pageNum,setPageNum]=useState(10);
-    const [initLoading,setInitLoading]=useState(false);
+    const {pagination,changePage,setPagination}= useList()
     const [loading,setLoading]=useState(false);
+    const nestedTagQuery = [
+        {title: '标题', dataIndex: 'title', key: 'title'},
+        {title: '封面大图', dataIndex: 'firstImg', key: 'firstImg'},
+        {title: '分类', dataIndex: 'typeName', key: 'typeName'},
+        {title: '更新时间', dataIndex: 'create_time', key: 'create_time',render:record => (<span>{moment(record).format('YYYY/MM/DD HH:mm:ss')}</span>)},
+        {title: '浏览量', dataIndex: 'read_count', key: 'read_count'},
+        {
+            title: '操作',
+            dataIndex: 'operation',
+            key: 'operation',
+            render: (record,text)=> (
+                <div size="middle" className={style.iconStyle}>
+                    <a onClick={()=>{console.log('1111111',text)}}>
+                        <span>修改</span>
+                    </a>
+                    <a onClick={()=>{}}>
+                        <span>删除</span>
+                    </a>
+                    <a onClick={()=>{}}>
+                        <span>置顶</span>
+                    </a>
+                </div>
+            ),
+        },
+    ];
 
     useEffect(async ()=>{
+        const {pageSize,current} = pagination
         const options={
-            page_start:page*pageNum,
-            page_end:(page+1)*pageNum,
+            page_start:pageSize*(current-1),
+            page_end:current*pageSize,
         };
-
-        let {data,count}=await GetList(options);
-        console.log('zzz',data);
-        if(!(count>options.page_end)){
-            setLoading(true);
-        }
+        setLoading(true);
+        const {data,count}=await GetList(options);
+        const _pagination={...pagination};
+        _pagination.total = count
+        setPagination(_pagination);
         setList(data);
-    },[page]);
+        setLoading(false);
+    },[pagination.current,pagination.pageSize]);
 
     const GetList=(options)=>useHttpHook({url: apiUrl.articleList, method: 'post',body:options})();
-
-
-    const onLoadMore=()=>{
-        setPage(page+1);
-    };
-    const loadMore =
-        !initLoading && !loading ? (
-            <div
-                style={{
-                    textAlign: 'center',
-                    marginTop: 12,
-                    height: 32,
-                    lineHeight: '32px',
-                }}
-            >
-                <Button onClick={onLoadMore}>loading more</Button>
-            </div>
-        ) : null;
-
     return (
         <>
-            <List
-                loading={initLoading}
-                loadMore={loadMore}
-                header={
-                <Row className="list-div" wrap="true" justify="center " style={{borderBottom:"1px solid #ddd"}}>
-                    <Col span={7}>
-                        <b>标题</b>
-                    </Col>
-                    <Col span={4}>
-                        <b>封面大图</b>
-                    </Col>
-                    <Col span={3}>
-                        <b>分类</b>
-                    </Col>
-                    <Col span={3}>
-                        <b>更新时间</b>
-                    </Col>
-                    <Col span={3}>
-                        <b>浏览量</b>
-                    </Col>
-
-                    <Col span={4}>
-                        <b>操作</b>
-                    </Col>
-                </Row>
-            }
-                  bordered
-                  dataSource={articleList}
-                  renderItem={item => (
-                      <List.Item className="list-item" style={{borderBottom:"1px solid #ddd"}} key={item.title}>
-                          <Skeleton avatar title={false} loading={item.loading} active>
-                              <Row className="list-div" wrap="true" justify="center" align="middle" >
-                                  <Col span={7}>
-                                     {item.title}
-                                  </Col>
-                                  <Col span={4}>
-                                      {
-                                          item.firstImg?<Image src={item.firstImg} />:null
-                                      }
-                                  </Col>
-                                  <Col span={3} className='list-item-tag'>
-                                      <Tag>{item.tab}</Tag>
-                                  </Col>
-                                  <Col span={3}>
-                                     {item.update_time_text}
-                                  </Col>
-                                  <Col span={3}>
-                                     {item.read_count||0}
-                                  </Col>
-
-                                  <Col span={4}>
-                                      <Space direction='vertical' size={[2,4]}>
-                                          <Button type="link" size='small' shape="round" icon={<EditOutlined/>}>修改</Button>
-                                          <Button type="link"  danger size='small' shape="round" icon={<DeleteOutlined />}>删除 </Button>
-                                          <Button type="link" size='small' shape="round" icon={<ToTopOutlined />}>置顶 </Button>
-                                      </Space>
-                                  </Col>
-                              </Row>
-                          </Skeleton>
-                      </List.Item>
-                  )}
-
-            >
-            </List>
-
+            <Table
+                className={style.tableItem}
+                columns={nestedTagQuery}
+                loading={loading}
+                rowKey="id"
+                pagination={pagination}
+                dataSource={articleList}
+                expandRowByClick={true}
+                onChange={changePage}
+            />
         </>
     )
 };

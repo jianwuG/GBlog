@@ -4,7 +4,6 @@ const Service = require('egg').Service;
 
 class UserService extends Service {
     async find(username, password) {
-        console.log('1111111112222222211',username,password);
         const user1 = await this.app.mysql.get('user', {username});
         const user2 = await this.app.mysql.get('user', {username, password});
         let _msg = '';

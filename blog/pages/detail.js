@@ -34,11 +34,9 @@ const Detail = ({router}) => {
     });
 
     useEffect(async () => {
-        console.log('111', router.query.id)
         const body = await useHttpHook({url: BlogPath.getArticleDetail + router.query.id, method: 'get'})()
         setDetail(body);
         let html = marked(body.mark).replace(/<pre>/g, "<pre category='hljs'>")
-        console.log();
         setArticleHtml(html)
     }, [router]);
 
