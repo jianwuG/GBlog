@@ -1,18 +1,27 @@
-.tableItem{
+.tableItem {
   margin-top: 60px;
+  cursor: pointer;
 }
-.iconStyle{
+
+.iconStyle {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.iconStyle a{
+
+.iconStyle a {
   display: flex;
   font-size: 20px;
   align-items: center;
   margin-top: 10px;
 }
-.iconStyle a span{
+
+.iconStyle a span {
   margin-left: 6px;
+}
+
+.ant-btn-dangerous {
+  color: #1890ff !important;
+  border: 1px solid #1890ff !important;
 }

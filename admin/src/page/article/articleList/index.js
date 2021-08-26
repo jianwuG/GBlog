@@ -1,19 +1,16 @@
 import React, {useState,useEffect} from 'react';
-import {useSelector} from "react-redux";
 import moment from 'moment'
-import {Row, Col, List, Skeleton, Space, Button,Image,Tag ,Table } from 'antd'
+import {Table } from 'antd'
 import {EditOutlined,DeleteOutlined,ToTopOutlined} from '@ant-design/icons'
 import './index.scss'
-import {useHttpHook} from "../../../hooks";
+import {useHttpHook,useList} from "../../../hooks";
 import apiUrl from "../../../api/apiUrl";
 import style from "../../tag/list/index.module.scss";
 
 
 const ArticleList = () => {
     const [articleList, setList] = useState([]);
-    const [page,setPage]=useState(0);
-    const [pageNum,setPageNum]=useState(10);
-    const [initLoading,setInitLoading]=useState(false);
+    const {pagination,changePage,setPagination}= useList()
     const [loading,setLoading]=useState(false);
     const nestedTagQuery = [
         {title: '标题', dataIndex: 'title', key: 'title'},
@@ -25,9 +22,9 @@ const ArticleList = () => {
             title: '操作',
             dataIndex: 'operation',
             key: 'operation',
-            render: record=> (
+            render: (record,text)=> (
                 <div size="middle" className={style.iconStyle}>
-                    <a onClick={()=>{}}>
+                    <a onClick={()=>{console.log('1111111',text)}}>
                         <EditOutlined/>
                         <span>修改</span>
                     </a>
@@ -45,18 +42,19 @@ const ArticleList = () => {
     ];
 
     useEffect(async ()=>{
+        const {pageSize,current} = pagination
         const options={
-            page_start:page*pageNum,
-            page_end:(page+1)*pageNum,
+            page_start:pageSize*(current-1),
+            page_end:current*pageSize,
         };
-
-        let {data,count}=await GetList(options);
-        console.log('zzz',data);
-        if(!(count>options.page_end)){
-            setLoading(true);
-        }
+        setLoading(true);
+        const {data,count}=await GetList(options);
+        const _pagination={...pagination};
+        _pagination.total = count
+        setPagination(_pagination);
         setList(data);
-    },[page]);
+        setLoading(false);
+    },[pagination.current,pagination.pageSize]);
 
     const GetList=(options)=>useHttpHook({url: apiUrl.articleList, method: 'post',body:options})();
     return (
@@ -64,10 +62,12 @@ const ArticleList = () => {
             <Table
                 className={style.tableItem}
                 columns={nestedTagQuery}
-                loading={initLoading}
+                loading={loading}
                 rowKey="id"
+                pagination={pagination}
                 dataSource={articleList}
                 expandRowByClick={true}
+                onChange={changePage}
             />
         </>
     )

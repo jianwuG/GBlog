@@ -2,7 +2,7 @@
 // import './../mock'
 import {message} from "antd";
 
-const useHttpHook = ({url, method = 'post', body = {},watch = []},headers) => {
+export const  useHttpHook= ({url, method = 'post', body = {},watch = []},headers) => {
 
     // const [result, setResult] = useState(null);
     // const [loading, setLoading] = useState(true);
@@ -58,4 +58,3 @@ const useHttpHook = ({url, method = 'post', body = {},watch = []},headers) => {
 };
 
 
-export default useHttpHook;
