@@ -2,16 +2,12 @@ import React, {useState,useEffect,useRef} from 'react';
 import {Row, Col, Input,Upload,Button,Space,Cascader} from "antd";
 import {useSelector,useDispatch} from "react-redux";
 import './index.scss'
-import marked from 'marked'
-import hljs from "highlight.js";
 import 'highlight.js/styles/monokai-sublime.css';
-
-import {UserOutlined, PictureOutlined} from "@ant-design/icons";
-import {useHttpHook} from "../../../hooks";
-import apiUrl from "../../../api/apiUrl";
 import {actionCreators} from "../../article/store";
 import {actionCreators as actionCreatorsTag} from "../../tag/store";
-
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
 
 const AddArticle = () => {
     const [title, setTitle] = useState('');//标题
@@ -25,38 +21,22 @@ const AddArticle = () => {
     const { TextArea } = Input;
     const dispatch=useDispatch();
     const optionRef=useRef();
+    const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-    marked.setOptions({
-        renderer: new marked.Renderer(),
-        highlight: function (code) {
-            return hljs.highlightAuto(code).value;
-        },
-        gfm: true, // 允许 Git Hub标准的markdown.
-        pedantic: false, // 不纠正原始模型任何的不良行为和错误（默认为false）
-        sanitize: false, // 对输出进行过滤（清理），将忽略任何已经输入的html代码（标签）
-        tables: true, // 允许支持表格语法（该选项要求 gfm 为true）
-        breaks: false, // 允许回车换行（该选项要求 gfm 为true）
-        smartLists: true, // 使用比原生markdown更时髦的列表
-        smartypants: false, // 使用更为时髦的标点
-    });
-
-    const changeContent = (e)=>{
-        setArticleMark(e.target.value)
-        let html = marked(e.target.value).replace(/<pre>/g, "<pre category='hljs'>")
-        setArticleHtml(html)
-    };
-
+    const  handleEditorChange=({ html, text }) =>{
+        console.log('handleEditorChange', html, text);
+    }
     const getOptionValue=(value)=>{
         const _firstValue=value[0];
         const _selectValue=value[1];
-        let _seletcItem;
+        let _selectItem;
         const _selectFirstItem=newTagList.find(item=>item.name===_firstValue);
 
         if(_selectFirstItem){
-            _seletcItem= _selectFirstItem.sunClass&&_selectFirstItem.sunClass.find(item=>item.value=_selectValue)
+            _selectItem= _selectFirstItem.sunClass&&_selectFirstItem.sunClass.find(item=>item.value=_selectValue)
         }
 
-        return _seletcItem.id
+        return _selectItem.id
     };
 
     const addArticle=async ()=>{
@@ -69,9 +49,7 @@ const AddArticle = () => {
            create_time:new Date().getTime(),
            update_time:new Date().getTime(),
        };
-       // console.log('zzzzzzzzzzzzzzzzz',option);
         dispatch(actionCreators.addArticle(option))
-
     };
 
     const {tagList}=useSelector(state=>({
@@ -101,16 +79,11 @@ const AddArticle = () => {
 
     },[tagList]);
 
-
-
     return (
         <>
             <div className='addArticle-wrapper'>
                 <Row className='addArticle-header'>
                     <Col span={2} style={{textAlign:'center',cursor: "pointer"}} onClick={setFirstPic}>
-                        {/*<Upload >*/}
-                        {/*    <Button className='addArticle-upload' icon={<PictureOutlined />}></Button>*/}
-                        {/*</Upload>*/}
                         <Cascader
                             options={newTagList}
                             ref={optionRef}
@@ -133,25 +106,11 @@ const AddArticle = () => {
                     </Col>
                 </Row>
                 <Row className="addArticle-html" gutter={10}>
-                    <Col span={12} className="addArticle-html-read" >
-                        <div className='show-html' dangerouslySetInnerHTML={{ __html: articleHtml }} ></div>
-                    </Col>
-                    <Col span={12} >
-                       <TextArea
-                           className="addArticle-html-write"
-                           rows={30}
-                           value={articleMark}
-                           onChange={changeContent}
-                           onPressEnter={changeContent}
-                           placeholder="文章内容"
-                       >
-                       </TextArea>
-                    </Col>
+                    <MdEditor style={{ height: '100%',width:'100%' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
                 </Row>
             </div>
         </>
     )
 };
-
 
 export default AddArticle;

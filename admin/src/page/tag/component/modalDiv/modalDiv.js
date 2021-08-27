@@ -1,10 +1,7 @@
 import React, {useState,useRef,useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {actionCreators} from '../../store'
-
 import {Modal, Form, Input} from "antd";
-import style from './index.module.scss'
-
 
 const ModalDiv = () => {
     const {visible, type,clickItem} = useSelector(state => ({

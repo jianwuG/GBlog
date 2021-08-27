@@ -12,7 +12,7 @@ const TagList = () => {
     const dispatch = useDispatch();
     const [list, setList] = useState([]);
     const [flagLoading, setFlagLoading] = useState(false);
-    const {pagination,changePage,setPagination}= useList()
+    const {pagination,changePage}= useList()
 
     const nestedTagQuery = [
         {title: 'ID', dataIndex: 'id', key: 'id'},
@@ -48,10 +48,6 @@ const TagList = () => {
                     <a onClick={(e) => addTagByItem(2,text,e)}>
                         <span>增加</span>
                     </a>
-                    {/*<a onClick={(record) => deleteTagItem(text.id)}>*/}
-                    {/*    <DeleteOutlined/>*/}
-                    {/*    <span>删除</span>*/}
-                    {/*</a>*/}
                 </div>
             ),
         },

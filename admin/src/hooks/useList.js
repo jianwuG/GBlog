@@ -17,7 +17,6 @@ export  const useList =()=>{
         _pagination.pageSize=pageSize;
         setPagination(_pagination)
     }
-
     return{
         pagination,
         changePage,

@@ -5,6 +5,7 @@ import {HashRouter as Router, Route} from "react-router-dom";
 import store from './../store'
 import LayoutPage from './../layout'
 import Login from './../page/login'
+import AddArticle from './../page/article/addArticle'
 
 
 function Main() {
@@ -15,6 +16,7 @@ function Main() {
                     <Route path="/login/" exact component={Login}/>
                     <Route path="/" exact component={LayoutPage}/>
                     <Route path="/index/"  component={LayoutPage}/>
+                    <Route path="/article/addArticle"  component={AddArticle}/>
                 </Router>
             </Provider>
         </>

@@ -14,5 +14,4 @@ export const addArticle=(options)=>{
   }
 };
 
-
 const AddArticleStatus=(options)=> useHttpHook({url: apiUrl.addArticle, method: 'post', body: {...options}})();

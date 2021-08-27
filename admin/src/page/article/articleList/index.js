@@ -1,21 +1,23 @@
 import React, {useState,useEffect} from 'react';
-import moment from 'moment'
-import {Table } from 'antd'
+import dayjs from 'dayjs'
+import {Button, Table} from 'antd'
 import './index.scss'
 import {useHttpHook,useList} from "../../../hooks";
 import apiUrl from "../../../api/apiUrl";
 import style from "../../tag/list/index.module.scss";
+import CreateArticle from "../component/create-article";
 
 
 const ArticleList = () => {
     const [articleList, setList] = useState([]);
     const {pagination,changePage,setPagination}= useList()
     const [loading,setLoading]=useState(false);
+    const [visible,setVisible]=useState(false);
     const nestedTagQuery = [
         {title: '标题', dataIndex: 'title', key: 'title'},
         {title: '封面大图', dataIndex: 'firstImg', key: 'firstImg'},
         {title: '分类', dataIndex: 'typeName', key: 'typeName'},
-        {title: '更新时间', dataIndex: 'create_time', key: 'create_time',render:record => (<span>{moment(record).format('YYYY/MM/DD HH:mm:ss')}</span>)},
+        {title: '更新时间', dataIndex: 'create_time', key: 'create_time',render:record => (<span>{dayjs(record).format('YYYY/MM/DD HH:mm:ss')}</span>)},
         {title: '浏览量', dataIndex: 'read_count', key: 'read_count'},
         {
             title: '操作',
@@ -55,6 +57,7 @@ const ArticleList = () => {
     const GetList=(options)=>useHttpHook({url: apiUrl.articleList, method: 'post',body:options})();
     return (
         <>
+            <Button type='primary' onClick={()=>{setVisible(true)}}>新建文章</Button>
             <Table
                 className={style.tableItem}
                 columns={nestedTagQuery}
@@ -65,9 +68,12 @@ const ArticleList = () => {
                 expandRowByClick={true}
                 onChange={changePage}
             />
+            {
+                visible&&<CreateArticle visible={visible} changeVisible={(val)=>{setVisible(val)}}/>
+            }
         </>
     )
-};
+}
 
 
 export default ArticleList;

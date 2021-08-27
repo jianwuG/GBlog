@@ -30,7 +30,7 @@ const ProjectList=()=>{
                                       actions={
                                           [
                                               <EditOutlined key="edit" />,
-                                              <DeleteOutlined key="detete" />,
+                                              <DeleteOutlined key="delete" />,
                                           ]
                                       }
                                 >

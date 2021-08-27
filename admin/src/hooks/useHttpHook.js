@@ -1,14 +1,8 @@
-// import {useState, useEffect, useCallback} from 'react'
-// import './../mock'
 import {message} from "antd";
 
 export const  useHttpHook= ({url, method = 'post', body = {},watch = []},headers) => {
 
-    // const [result, setResult] = useState(null);
-    // const [loading, setLoading] = useState(true);
-
     const Http=async ()=>{
-        // setLoading(true);
         const defaultHeader={
             'Content-Type':'application/JSON'
         };
@@ -31,7 +25,6 @@ export const  useHttpHook= ({url, method = 'post', body = {},watch = []},headers
                 if(res.status===200)
                 {
                     resolve(res.data);
-                    // setResult(res.data);
                 }
                 else{
                     message.error(res.msg)
@@ -41,15 +34,9 @@ export const  useHttpHook= ({url, method = 'post', body = {},watch = []},headers
                 message.error(err);
                 reject(err);
             }).finally(()=>{
-                // setLoading(false)
             })
         })
     }
-    //
-    // useEffect(  () => {
-    //     Http();
-    // }, watch);
-
     return Http
 };
 
