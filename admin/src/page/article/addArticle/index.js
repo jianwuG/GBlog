@@ -11,6 +11,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 
 const AddArticle = () => {
     const [title, setTitle] = useState('');//标题
+    const [articleValue,setArticleValue]=useState('')
     const [statusTitle, setStatusTitle] = useState('文章将自动保存草稿状态');//状态提示文字
     const [firstPic,setFirstPic]=useState('');//图片选择
     const [articleHtml ,setArticleHtml]=useState('预览内容');//html展示
@@ -18,13 +19,15 @@ const AddArticle = () => {
     const [typeName ,setTypeName] = useState(0);// 文章类别
 
     const [option,setOption]=useState(null);
-    const { TextArea } = Input;
     const dispatch=useDispatch();
     const optionRef=useRef();
     const mdParser = new MarkdownIt(/* Markdown-it options */);
 
     const  handleEditorChange=({ html, text }) =>{
         console.log('handleEditorChange', html, text);
+    }
+    const  onImageUpload=({ html, text }) =>{
+        console.log('onImageUpload', html, text);
     }
     const getOptionValue=(value)=>{
         const _firstValue=value[0];
@@ -40,16 +43,17 @@ const AddArticle = () => {
     };
 
     const addArticle=async ()=>{
-       const option={
-           title,
-           firstPic:'',
-           mark:articleMark,
-           type:getOptionValue(optionRef.current.state.value),
-           status:0,
-           create_time:new Date().getTime(),
-           update_time:new Date().getTime(),
-       };
-        dispatch(actionCreators.addArticle(option))
+        console.log('zzzzzzzzzzzzzzzz',articleValue)
+       // const option={
+       //     title,
+       //     firstPic:'',
+       //     mark:articleMark,
+       //     type:getOptionValue(optionRef.current.state.value),
+       //     status:0,
+       //     create_time:new Date().getTime(),
+       //     update_time:new Date().getTime(),
+       // };
+       //  dispatch(actionCreators.addArticle(option))
     };
 
     const {tagList}=useSelector(state=>({
@@ -106,7 +110,8 @@ const AddArticle = () => {
                     </Col>
                 </Row>
                 <Row className="addArticle-html" gutter={10}>
-                    <MdEditor style={{ height: '100%',width:'100%' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
+                    <MdEditor style={{ height: '100%',width:'100%' }}  renderHTML={text => mdParser.render(text)} onChange={handleEditorChange}
+                              onImageUpload={onImageUpload}/>
                 </Row>
             </div>
         </>

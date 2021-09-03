@@ -7,7 +7,7 @@
   box-sizing: border-box;
   text-align: center;
   width: 100%;
-  padding: 10px;
+  padding: 0 !important;
   .avatar{
     width: 100px;
     height: 100px;
@@ -68,6 +68,4 @@
 @keyframes dy{
   from { width: 0;}
 }
-.ant-drawer-body{
-  padding: 0 !important;
-}
+

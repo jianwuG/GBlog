@@ -23,7 +23,7 @@ const FootBar = () => {
 
     return (
         <div className={style.footBarWrapper}>
-            <span>网站已运行 {runTime}</span>
+            <span>已运行 {runTime}</span>
         </div>
     )
 };

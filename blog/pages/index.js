@@ -37,11 +37,11 @@ export default function Home(){
                         Number(top) > 350 && <UpCircleFilled onClick={goTop} className={style.homeGoTop}/>
                     }
                     <style global jsx>{
-                        ` 
-                 body{
-                  overflow:hidden;
-                 }
-                `
+                                    ` 
+                             body{
+                              overflow:hidden;
+                             }
+                        `
                     }
                     </style>
                 </div>

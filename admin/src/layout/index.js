@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Layout, Menu, Breadcrumb} from 'antd';
-import {Route} from 'react-router-dom';
+import {Route,useLocation} from 'react-router-dom';
 import {
     FileWordOutlined,
     PieChartOutlined,
@@ -8,10 +8,11 @@ import {
     TableOutlined,
 } from '@ant-design/icons';
 import ArticleList from './../page/article/articleList';
-import AddArticle from './../page/article/addArticle';
 import Project from './../page/project';
 import Homepage from './../page/Home';
 import TagList from './../page/tag/list';
+import NotFound from './../page/notFound'
+
 import './index.scss'
 import {useHttpHook} from "../hooks";
 import apiUrl from "../api/apiUrl";
@@ -35,6 +36,10 @@ const LayoutPage = (props) => {
         let {list} = await GetMenuList();
         setMenuList(list)
     }, []);
+    const {pathname}=useLocation()
+    useEffect(()=>{
+        console.log('11111111111111111111',pathname,getComponent(pathname))
+    },[pathname])
 
     const onCollapse = collapsed => {
         setCollapsed(collapsed);
@@ -53,7 +58,7 @@ const LayoutPage = (props) => {
             '/index': Homepage,
             '/index/article/list': ArticleList,
             '/index/tag': TagList,
-            '/index/project': Project
+            '/index/project': Project,
         }[key]
     }
     const getIcon = (key) => {

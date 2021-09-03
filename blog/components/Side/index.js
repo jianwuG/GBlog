@@ -29,8 +29,8 @@ const Side = () => {
     };
     return (
         <>
-            <Card
-                hoverable>
+            <div style={{background:'#fff',padding:'20px'}}
+                >
                 <Space size={[8, 12]} className={style.userInfo}>
                     <Avatar src={userInfo.avatarUrl} className={style.avatar}/>
                     <div className={style.name}>
@@ -63,7 +63,7 @@ const Side = () => {
                 <Category/>
                 <Divider plain>标签</Divider>
                 <TagSide/>
-            </Card>
+            </div>
         </>
     )
 };

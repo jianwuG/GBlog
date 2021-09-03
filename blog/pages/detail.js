@@ -46,8 +46,8 @@ const Detail = ({router}) => {
             <div className={style.detailWrapper}>
                 <Head><title>详情111</title></Head>
                 <Header/>
-                <Row className={style.rowWrapper}>
-                    <Col span={20} xs={22} sm={22} md={20} lg={20}>
+                <Row className={style.rowWrapper} span={24} xs={22} sm={22} md={20} lg={20}>
+                    <Col span={20} xs={22} sm={22} md={20} lg={20} className={style.article}>
                         <div className={style.articleTitle}>{detail.title}</div>
                         <div className={style.articleHtml} dangerouslySetInnerHTML={{__html: articleHtml}}></div>
                     </Col>

@@ -72,7 +72,6 @@ const TagList = () => {
             icon: <ExclamationCircleOutlined/>,
             content: '',
             okText: '确定',
-            okType: 'danger',
             cancelText: '取消',
             onOk() {
                 dispatch(actionCreators.deleteItem(id))

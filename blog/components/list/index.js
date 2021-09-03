@@ -84,7 +84,7 @@ const List = () => {
                     <Card className={style.listItem} hoverable={true}
                           key={item.id + item.title}
                           onClick={() => goDetail(item.id)}
-                          bodyStyle={{padding: '10px', width: "100%", display: 'flex', flexBasis: 'row'}}>
+                          bodyStyle={{ width: "100%", display: 'flex', flexBasis: 'row'}}>
                         <div className={style.listItemLeft}>
                             <span className={style.title}>{item.title}</span>
                             <span className={style.marked}>{item.marked}</span>
