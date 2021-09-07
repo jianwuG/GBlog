@@ -33,7 +33,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "react-app-rewired start port=80",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
@@ -57,7 +57,9 @@
     ]
   },
   "devDependencies": {
+    "Base64": "^1.1.0",
     "ali-oss": "^6.16.0",
+    "crypto-js": "^4.1.1",
     "customize-cra": "^1.0.0",
     "oss": "^0.0.1",
     "react-app-rewired": "^2.1.8",

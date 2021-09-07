@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {Card, Avatar, Space, Divider} from "antd";
 import {WechatFilled, WeiboCircleFilled, GithubFilled, AliwangwangFilled} from '@ant-design/icons'
+import dynamic from 'next/dynamic'
 import Category from '../category'
 import TagSide from '../tagSide'
 import style from './index.module.scss'
+const Loading = dynamic(import('../../components/other/loading'))
 
 const Side = () => {
     const userInfo = {

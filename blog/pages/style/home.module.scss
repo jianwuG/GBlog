@@ -1,15 +1,18 @@
 
 .List {
+
 }
 
 .showInfo {
   margin-left: 10px;
+  padding-top: 20px;
 }
 .homeWrapper{
   width: 100%;
   height: 100vh;
   overflow-y: auto;
   position: relative;
+  background: linear-gradient(180deg, #f4f4f4 0%, #f4f4f4 100%);;
   .homeContext{
     width: 100%;
     height: 100%;

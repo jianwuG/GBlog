@@ -56,7 +56,7 @@ const Header = () => {
                     {/*<MenuFoldOutlined />*/}
                 </Col>
                 <Col span={6} className={style.avatar} onClick={() => goPath('/')}>
-                    <Avatar src={<Image src={userInfo.avatarUrl}/>}/>
+                    <img src={userInfo.avatarUrl} style={{width:'30px',borderRadius:'50%'}}/>
                     <span style={{marginLeft: "10px"}}>{userInfo.name}</span>
                 </Col>
                 <Col span={10} xs={0} sm={0} md={0} lg={0} xl={10}>

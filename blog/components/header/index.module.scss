@@ -1,20 +1,21 @@
-.headerWrapper{
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 20px;
-    height: 64px;
+.headerWrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+  background: #fff;
+
+  .avatar {
     display: flex;
     align-items: center;
-  border-bottom:1px solid   #ededed ;
-    .avatar{
-       display: flex;
-      align-items: center;
-        flex-direction: row;
-      cursor: pointer;
-
-    }
+    flex-direction: row;
+    cursor: pointer;
+  }
 }
 
-.ant-drawer-body{
+.ant-drawer-body {
   padding: 0 !important;
 }
